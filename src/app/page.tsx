@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BrandWordmark } from "@/components/BrandWordmark";
 import { BranchCard, ComingSoonCard } from "@/components/BranchCard";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -13,69 +14,58 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden px-4 pb-16 pt-28 md:px-10 md:pb-24 md:pt-36">
-        <div
-          className="pointer-events-none absolute inset-0 -z-10 opacity-40"
-          aria-hidden
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(238,152,0,0.18), transparent), radial-gradient(ellipse 60% 40% at 90% 20%, rgba(53,125,241,0.12), transparent)",
-          }}
-        />
-        <div className="mx-auto flex max-w-container flex-col items-center text-center">
-          <div className="reveal mb-6 md:mb-8">
-            <Image
-              src="/brand/logo.png"
-              alt={site.name}
-              width={140}
-              height={140}
-              priority
-              className="mx-auto h-28 w-auto drop-shadow-2xl md:h-36"
-            />
-          </div>
-          <p className="reveal mb-3 text-xs font-bold uppercase tracking-[0.2em] text-secondary">
-            {site.name}
-          </p>
-          <h1 className="reveal max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground md:text-6xl lg:text-7xl">
-            Geleceğin Sporcularını{" "}
-            <span className="text-secondary">Yetiştiriyoruz</span>
-          </h1>
-          <p className="reveal mt-5 max-w-xl text-base text-muted md:text-lg">
-            Lisanslı antrenörler eşliğinde profesyonel altyapı eğitimi. Sporu sevdiriyor,
-            disiplin aşılıyoruz.
-          </p>
-          <div className="reveal mt-8 flex flex-col items-center gap-3 sm:flex-row">
-            <Link
-              href="/iletisim#basvuru"
-              className="inline-flex items-center gap-2 rounded-full bg-navy px-8 py-4 text-base font-semibold text-white transition hover:scale-105"
-            >
-              Ücretsiz Deneme Dersi Al
-              <span aria-hidden>→</span>
-            </Link>
-            <Link
-              href="/#branslar"
-              className="inline-flex items-center gap-2 rounded-full border border-outline-variant/50 px-8 py-4 text-base font-semibold text-foreground transition hover:border-secondary hover:text-secondary"
-            >
-              Branşları İncele
-            </Link>
+      {/* Hero — brand-led, full-bleed photo */}
+      <section className="relative min-h-[100svh] overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
+          <Image
+            src="/brand/hero-academy.jpg"
+            alt=""
+            fill
+            priority
+            className="object-cover object-[72%_center]"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/92 to-white/25 md:via-white/88 md:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/40" />
+        </div>
+
+        <div className="mx-auto flex min-h-[100svh] max-w-container flex-col justify-center px-4 pb-16 pt-28 md:px-10 md:pb-24 md:pt-32">
+          <div className="max-w-xl lg:max-w-2xl">
+            <div className="reveal reveal-delay-1 mb-8 md:mb-10">
+              <BrandWordmark size="hero" href={null} showLogo className="!items-start gap-4 md:gap-6" />
+            </div>
+            <p className="reveal reveal-delay-2 max-w-md text-lg leading-relaxed text-muted md:text-xl">
+              Maltepe’de lisanslı antrenörlerle basketbol, voleybol ve jimnastik.
+              Disiplinli altyapı, güvenli salon, ücretsiz deneme dersi.
+            </p>
+            <div className="reveal reveal-delay-3 mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Link
+                href="/iletisim#basvuru"
+                className="cta-lift inline-flex items-center justify-center gap-2 rounded-full bg-navy px-8 py-4 text-base font-semibold text-white"
+              >
+                Ücretsiz Deneme Dersi Al
+                <span aria-hidden>→</span>
+              </Link>
+              <Link
+                href="/#branslar"
+                className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-semibold text-arel transition hover:text-navy"
+              >
+                Branşları incele
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Branches */}
-      <section id="branslar" className="reveal px-4 pb-20 md:px-10">
+      <section id="branslar" className="reveal px-4 py-20 md:px-10 md:py-28">
         <div className="mx-auto max-w-container">
-          <div className="mb-8 flex items-end justify-between gap-4 md:mb-10">
-            <SectionHeading eyebrow="Eğitimlerimiz" title="Branşlarımız" className="mb-0 md:mb-0" />
-            <Link
-              href="/iletisim"
-              className="hidden shrink-0 pb-1 text-sm font-semibold text-primary hover:text-secondary sm:block"
-            >
-              Tümünü Gör
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <SectionHeading
+            eyebrow="Eğitimlerimiz"
+            title="Branşlarımız"
+            description="Yaşa özel programlar. İleride yeni branşlar grid’e eklenmeye hazır."
+          />
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
             {branches.map((branch) => (
               <BranchCard key={branch.slug} branch={branch} />
             ))}
@@ -86,61 +76,75 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why us */}
-      <section className="reveal bg-surface-low px-4 py-20 md:px-10">
+      {/* Why Asparel — typography-led */}
+      <section className="reveal border-y border-outline-variant/30 bg-surface-low/80 px-4 py-20 md:px-10 md:py-28">
         <div className="mx-auto max-w-container">
           <SectionHeading
-            align="center"
-            title="Neden Asparel?"
-            description="Sadece bir kulüp değil, büyük bir aileyiz."
+            eyebrow="Neden Asparel"
+            title="Sadece kulüp değil, gelişim yolu"
+            description="Velilerin güveneceği net bir yapı: lisans, güvenlik, takip."
           />
-          <div className="grid gap-4 md:grid-cols-3">
-            <WhyCard
-              title="Lisanslı Antrenörler"
-              body="Tüm hocalarımız kendi alanında uzman ve lisanslı spor insanlarıdır."
-              border="border-primary"
-              iconBg="bg-navy"
-              icon="coaches"
+          <div className="grid gap-0 md:grid-cols-3 md:divide-x md:divide-outline-variant/40">
+            <WhyItem
+              index="01"
+              title="Lisanslı antrenörler"
+              body="Branşında uzman, çocuk gelişimine hakim eğitmen kadrosu."
             />
-            <WhyCard
-              title="Modern Tesisler"
-              body="Hijyenik, güvenli spor alanları ve veli bekleme salonu imkanı."
-              border="border-secondary-container"
-              iconBg="bg-secondary-container/20"
-              icon="facility"
+            <WhyItem
+              index="02"
+              title="Güvenli tesis"
+              body="Hijyenik salonlar, kontrollü alanlar ve veli için rahat bekleme."
             />
-            <WhyCard
-              title="Gelişim Takibi"
-              body="Sporcularımızın fiziksel ve mental gelişimi düzenli olarak takip edilir."
-              border="border-tertiary-strong"
-              iconBg="bg-tertiary-strong/20"
-              icon="growth"
+            <WhyItem
+              index="03"
+              title="Gelişim takibi"
+              body="Fiziksel ve mental ilerleme düzenli gözlemle desteklenir."
             />
           </div>
         </div>
       </section>
 
+      {/* Progression strip */}
+      <section className="reveal overflow-hidden border-b border-outline-variant/25 py-8" aria-label="Gelişim yolu">
+        <div className="progress-marquee font-display text-sm font-bold uppercase tracking-[0.25em] text-arel/80 md:text-base">
+          {[0, 1].map((copy) => (
+            <span key={copy} className="flex shrink-0 gap-8">
+              <span>Teknik Eğitim</span>
+              <span className="text-coral">→</span>
+              <span>Sağlıklı Gelişim</span>
+              <span className="text-coral">→</span>
+              <span>Başarılı Kariyer</span>
+              <span className="text-asp">·</span>
+              <span>Maltepe</span>
+              <span className="text-coral">→</span>
+              <span>Ücretsiz Deneme</span>
+              <span className="text-asp">·</span>
+            </span>
+          ))}
+        </div>
+      </section>
+
       {/* FAQ + Location */}
-      <section className="reveal px-4 py-20 md:px-10">
-        <div className="mx-auto grid max-w-container gap-12 lg:grid-cols-2">
+      <section className="reveal px-4 py-20 md:px-10 md:py-28">
+        <div className="mx-auto grid max-w-container gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
             <SectionHeading
-              eyebrow="Sıkça Sorulanlar"
-              title="Merak Ettikleriniz"
-              description="Deneme dersi, yaş grupları ve servis hakkında hızlı cevaplar."
+              eyebrow="SSS"
+              title="Merak ettikleriniz"
+              description="Deneme dersi, yaş ve konum — kısa cevaplar."
             />
             <FaqAccordion items={faqs.slice(0, 4)} />
             <Link
               href="/iletisim"
-              className="mt-6 inline-block text-sm font-semibold text-secondary hover:underline"
+              className="mt-8 inline-block text-sm font-semibold text-arel hover:text-navy"
             >
               Tüm sorular ve iletişim →
             </Link>
           </div>
           <div>
-            <SectionHeading eyebrow="Lokasyon" title="Konumumuz" />
-            <div className="glass-panel overflow-hidden rounded-2xl p-4 md:p-6">
-              <div className="relative h-56 overflow-hidden rounded-xl bg-surface-highest md:h-64">
+            <SectionHeading eyebrow="Lokasyon" title="Maltepe’deyiz" />
+            <div className="overflow-hidden rounded-3xl border border-outline-variant/35 bg-white">
+              <div className="relative h-56 md:h-72">
                 <iframe
                   title="Asparel Spor Kulübü harita"
                   src={site.mapsEmbedUrl}
@@ -150,22 +154,24 @@ export default function HomePage() {
                   allowFullScreen
                 />
               </div>
-              <p className="mt-4 text-sm text-muted">{site.address.line}</p>
-              <a
-                href={site.mapsLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-block text-sm font-semibold text-secondary hover:underline"
-              >
-                Yol tarifi al
-              </a>
+              <div className="p-6">
+                <p className="text-sm text-muted">{site.address.line}</p>
+                <a
+                  href={site.mapsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-block text-sm font-semibold text-arel hover:text-navy"
+                >
+                  Yol tarifi al
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA form teaser */}
-      <section className="reveal px-4 pb-20 md:px-10">
+      {/* Trial form */}
+      <section className="reveal px-4 pb-24 md:px-10 md:pb-32">
         <div className="mx-auto max-w-2xl">
           <TrialForm />
         </div>
@@ -174,65 +180,20 @@ export default function HomePage() {
   );
 }
 
-function WhyCard({
+function WhyItem({
+  index,
   title,
   body,
-  border,
-  iconBg,
-  icon,
 }: {
+  index: string;
   title: string;
   body: string;
-  border: string;
-  iconBg: string;
-  icon: "coaches" | "facility" | "growth";
 }) {
   return (
-    <div className={`rounded-2xl border-l-4 ${border} bg-surface-high p-6`}>
-      <div className={`mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full ${iconBg}`}>
-        <WhyIcon name={icon} />
-      </div>
-      <h3 className="mb-1 text-sm font-bold uppercase tracking-wide text-foreground">{title}</h3>
-      <p className="text-sm text-muted">{body}</p>
+    <div className="px-0 py-8 md:px-8 md:py-2 first:md:pl-0 last:md:pr-0">
+      <p className="font-display text-xs font-bold tracking-[0.2em] text-asp">{index}</p>
+      <h3 className="mt-3 font-display text-xl font-bold text-navy md:text-2xl">{title}</h3>
+      <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">{body}</p>
     </div>
-  );
-}
-
-function WhyIcon({ name }: { name: "coaches" | "facility" | "growth" }) {
-  if (name === "coaches") {
-    return (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <path
-          d="M8 14a4 4 0 118 0M4 20a5 5 0 0110 0M14 11a3.5 3.5 0 015.5 2.5M16 20a4 4 0 014 0"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-        />
-      </svg>
-    );
-  }
-  if (name === "facility") {
-    return (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <path
-          d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    );
-  }
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M4 19l5-8 4 4 7-10"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

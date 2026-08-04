@@ -11,13 +11,13 @@ export function FaqAccordion({ items }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {items.map((item, index) => {
         const open = openIndex === index;
         return (
           <div
             key={item.question}
-            className="overflow-hidden rounded-2xl border border-outline-variant/30 bg-surface-high"
+            className="overflow-hidden rounded-2xl border border-outline-variant/35 bg-white"
           >
             <button
               type="button"
@@ -25,16 +25,16 @@ export function FaqAccordion({ items }: Props) {
               aria-expanded={open}
               onClick={() => setOpenIndex(open ? null : index)}
             >
-              <span className="font-semibold text-foreground">{item.question}</span>
+              <span className="font-semibold text-navy">{item.question}</span>
               <span
-                className={`shrink-0 text-secondary transition-transform ${open ? "rotate-45" : ""}`}
+                className={`shrink-0 font-display text-xl text-asp transition-transform ${open ? "rotate-45" : ""}`}
                 aria-hidden
               >
                 +
               </span>
             </button>
             {open && (
-              <div className="border-t border-outline-variant/20 px-5 pb-4 pt-3 text-sm leading-relaxed text-muted">
+              <div className="border-t border-outline-variant/25 px-5 pb-4 pt-3 text-sm leading-relaxed text-muted">
                 {item.answer}
               </div>
             )}

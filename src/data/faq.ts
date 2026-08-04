@@ -7,26 +7,26 @@ export const faqs: FaqItem[] = [
   {
     question: "Deneme dersi ücretli mi?",
     answer:
-      "Hayır. Ücretsiz deneme dersi ile branşımızı ve antrenörlerimizi tanıyabilirsiniz. Form veya WhatsApp üzerinden kolayca randevu alın.",
+      "Hayır — ücretsizdir. Form veya WhatsApp ile randevu alıp branşı ve antrenörü yerinde deneyebilirsiniz.",
   },
   {
     question: "Hangi yaş grupları kabul ediliyor?",
     answer:
-      "Jimnastik 2–5 yaş, voleybol 8–13 yaş, basketbol 8–13 yaş aralıklarında eğitim veriyoruz. Detaylar her branş sayfasında yer alır.",
+      "Jimnastik 2–5, basketbol ve voleybol 8–13 yaş. Detaylar her branş sayfasında.",
   },
   {
-    question: "Servis imkanı var mı?",
+    question: "Servis var mı?",
     answer:
-      "Servis durumu dönemsel olarak değişiklik gösterebilir. Güncel bilgi için WhatsApp hattımızdan veya iletişim formundan bize ulaşın.",
+      "Döneme göre değişebilir. Güncel bilgi için WhatsApp’tan sorun.",
   },
   {
     question: "Antrenörler lisanslı mı?",
     answer:
-      "Evet. Tüm eğitmenlerimiz kendi branşlarında lisanslı ve alanında deneyimli spor insanlarıdır.",
+      "Evet. Eğitmenlerimiz branşlarında lisanslı ve çocuk gelişimine hakim.",
   },
   {
     question: "Salon nerede?",
     answer:
-      "Zümrütevler, Maltepe / İstanbul konumundayız. Yol tarifi için iletişim sayfasındaki haritayı kullanabilir veya WhatsApp’tan adres isteyebilirsiniz.",
+      "Zümrütevler, Maltepe / İstanbul. Harita ve yol tarifi iletişim sayfasında.",
   },
 ];

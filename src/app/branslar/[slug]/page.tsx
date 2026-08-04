@@ -47,46 +47,44 @@ export default async function BranchPage({ params }: Props) {
               alt=""
               fill
               priority
-              className="object-cover object-top opacity-35"
+              className="object-cover object-top opacity-40"
               sizes="100vw"
             />
           ) : (
             <div
               className="absolute inset-0"
               style={{
-                background: `linear-gradient(135deg, #ffffff 0%, ${branch.accentHex}33 50%, #eef2f8 100%)`,
+                background: `linear-gradient(135deg, #ffffff 0%, ${branch.accentHex}30 48%, #eef3f9 100%)`,
               }}
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/80 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/75 via-white/88 to-white" />
         </div>
 
-        <div className="mx-auto max-w-container px-4 pb-16 pt-28 md:px-10 md:pb-20 md:pt-36">
+        <div className="mx-auto max-w-container px-4 pb-16 pt-28 md:px-10 md:pb-24 md:pt-36">
           <Link
             href="/#branslar"
-            className="mb-6 inline-block text-sm font-semibold text-muted hover:text-secondary"
+            className="mb-8 inline-block text-sm font-semibold text-muted transition hover:text-arel"
           >
             ← Tüm branşlar
           </Link>
-          <div className="reveal flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="reveal flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
-              <span
-                className="mb-3 inline-block rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wider"
-                style={{
-                  borderColor: `${branch.accentHex}55`,
-                  backgroundColor: `${branch.accentHex}22`,
-                  color: branch.accentHex,
-                }}
+              <p
+                className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em]"
+                style={{ color: branch.accentHex }}
               >
                 {branch.ageRangeLabel}
-              </span>
-              <h1 className="text-4xl font-extrabold tracking-tight text-foreground md:text-6xl">
+              </p>
+              <h1 className="font-display text-5xl font-bold tracking-tight text-navy md:text-7xl">
                 {branch.name}
               </h1>
-              <p className="mt-4 text-base text-muted md:text-lg">{branch.longDescription}</p>
+              <p className="mt-5 text-base leading-relaxed text-muted md:text-lg">
+                {branch.longDescription}
+              </p>
             </div>
             <div
-              className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-white md:h-20 md:w-20"
+              className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-white shadow-lg md:h-20 md:w-20"
               style={{ backgroundColor: branch.accentHex }}
             >
               <SportIcon name={branch.icon} className="h-8 w-8 md:h-10 md:w-10" />
@@ -95,20 +93,25 @@ export default async function BranchPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="reveal px-4 pb-16 md:px-10">
+      <section className="reveal px-4 pb-16 md:px-10 md:pb-20">
         <div className="mx-auto max-w-container">
-          <h2 className="mb-6 text-2xl font-bold md:text-3xl">Yaş Grupları</h2>
+          <h2 className="mb-8 font-display text-2xl font-bold text-navy md:text-3xl">
+            Yaş grupları
+          </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {branch.ageGroups.map((group) => (
               <div
                 key={group.label}
-                className="rounded-2xl border border-outline-variant/30 bg-surface-high p-5"
+                className="rounded-3xl border border-outline-variant/40 bg-white p-6"
               >
-                <p className="text-sm font-bold uppercase tracking-wide" style={{ color: branch.accentHex }}>
+                <p
+                  className="text-xs font-bold uppercase tracking-[0.14em]"
+                  style={{ color: branch.accentHex }}
+                >
                   {group.label}
                 </p>
                 {group.subtitle && (
-                  <p className="mt-2 text-sm text-muted">{group.subtitle}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">{group.subtitle}</p>
                 )}
               </div>
             ))}
@@ -116,14 +119,16 @@ export default async function BranchPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="reveal bg-surface-low px-4 py-16 md:px-10">
+      <section className="reveal border-y border-outline-variant/30 bg-surface-low/70 px-4 py-16 md:px-10 md:py-20">
         <div className="mx-auto max-w-container">
-          <h2 className="mb-6 text-2xl font-bold md:text-3xl">Program Vurguları</h2>
-          <ul className="grid gap-3 md:grid-cols-3">
+          <h2 className="mb-8 font-display text-2xl font-bold text-navy md:text-3xl">
+            Program vurguları
+          </h2>
+          <ul className="grid gap-4 md:grid-cols-3">
             {branch.highlights.map((item) => (
               <li
                 key={item}
-                className="rounded-2xl bg-surface-high px-5 py-4 text-sm font-medium text-foreground"
+                className="rounded-3xl border border-outline-variant/30 bg-white px-6 py-5 text-sm font-medium leading-relaxed text-navy"
               >
                 <span className="mr-2" style={{ color: branch.accentHex }} aria-hidden>
                   ●
@@ -132,27 +137,27 @@ export default async function BranchPage({ params }: Props) {
               </li>
             ))}
           </ul>
-          <p className="mt-8 text-center text-sm font-semibold uppercase tracking-widest text-muted">
+          <p className="mt-10 text-center font-display text-xs font-bold uppercase tracking-[0.22em] text-arel/80 md:text-sm">
             {branch.progression.join(" → ")}
           </p>
         </div>
       </section>
 
       {branch.image && (
-        <section className="reveal px-4 py-12 md:px-10">
-          <div className="relative mx-auto aspect-[4/5] max-w-lg overflow-hidden rounded-2xl md:aspect-[3/4]">
+        <section className="reveal px-4 py-14 md:px-10">
+          <div className="relative mx-auto aspect-[3/4] max-w-md overflow-hidden rounded-3xl border border-outline-variant/30 shadow-xl md:aspect-[4/5]">
             <Image
               src={branch.image}
               alt={branch.imageAlt ?? branch.name}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, 512px"
+              sizes="(max-width: 768px) 100vw, 448px"
             />
           </div>
         </section>
       )}
 
-      <section className="reveal px-4 pb-20 md:px-10">
+      <section className="reveal px-4 pb-24 md:px-10 md:pb-32">
         <div className="mx-auto max-w-2xl">
           <TrialForm defaultBranch={branch.slug} />
         </div>

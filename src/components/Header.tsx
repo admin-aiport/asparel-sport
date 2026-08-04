@@ -1,10 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { site } from "@/lib/site";
+import { BrandWordmark } from "@/components/BrandWordmark";
 import { getActiveBranches } from "@/data/branches";
 
 const navLinks = [
@@ -19,68 +18,51 @@ export function Header() {
   const branches = getActiveBranches();
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-outline-variant/30 bg-white/85 shadow-sm backdrop-blur-md">
-      <div className="mx-auto flex h-16 w-full max-w-container items-center justify-between px-4 md:px-10">
-        <div className="flex items-center gap-3">
+    <header className="fixed top-0 z-50 w-full border-b border-outline-variant/25 bg-white/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-[4.25rem] w-full max-w-container items-center justify-between px-4 md:px-10">
+        <div className="flex items-center gap-2">
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-lg p-2 text-foreground md:hidden"
+            className="inline-flex items-center justify-center rounded-lg p-2 text-navy md:hidden"
             aria-label="Menüyü aç"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
             <MenuIcon open={open} />
           </button>
-          <Link
-            href="/"
-            className="flex items-center gap-2.5"
-            onClick={() => setOpen(false)}
-            aria-label={site.name}
-          >
-            <Image
-              src="/brand/logo.png"
-              alt=""
-              width={44}
-              height={44}
-              className="h-10 w-10 object-contain md:h-11 md:w-11"
-              priority
-            />
-            <span className="flex flex-col leading-none">
-              <span className="text-base font-extrabold tracking-tight md:text-lg">
-                <span className="text-[#5BA8D9]">ASP</span>
-                <span className="text-[#1A4F9C]">AREL</span>
-              </span>
-              <span className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#5BA8D9] md:text-[11px]">
-                Spor Kulübü
-              </span>
-            </span>
-          </Link>
+          <div onClick={() => setOpen(false)}>
+            <BrandWordmark size="md" />
+          </div>
         </div>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Ana menü">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-semibold transition-colors hover:text-secondary ${
-                pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))
-                  ? "text-secondary"
-                  : "text-muted"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav className="hidden items-center gap-9 md:flex" aria-label="Ana menü">
+          {navLinks.map((link) => {
+            const active =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname === link.href || pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-[13px] font-semibold tracking-wide transition-colors hover:text-arel ${
+                  active ? "text-arel" : "text-muted"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <div className="group relative">
-            <span className="cursor-default text-sm font-semibold text-muted transition-colors group-hover:text-secondary">
-              Branş Detay
+            <span className="cursor-default text-[13px] font-semibold tracking-wide text-muted transition-colors group-hover:text-arel">
+              Branşlar
             </span>
-            <div className="invisible absolute left-0 top-full z-50 mt-2 min-w-44 rounded-xl border border-outline-variant/30 bg-surface-high p-2 opacity-0 shadow-xl transition group-hover:visible group-hover:opacity-100">
+            <div className="invisible absolute left-1/2 top-full z-50 mt-3 min-w-48 -translate-x-1/2 rounded-2xl border border-outline-variant/40 bg-white p-2 opacity-0 shadow-xl transition group-hover:visible group-hover:opacity-100">
               {branches.map((b) => (
                 <Link
                   key={b.slug}
                   href={`/branslar/${b.slug}`}
-                  className="block rounded-lg px-3 py-2 text-sm font-medium text-foreground hover:bg-surface-highest hover:text-secondary"
+                  className="block rounded-xl px-3 py-2.5 text-sm font-medium text-navy hover:bg-surface-low hover:text-arel"
                 >
                   {b.name}
                 </Link>
@@ -91,20 +73,20 @@ export function Header() {
 
         <Link
           href="/iletisim#basvuru"
-          className="rounded-full bg-primary-fixed px-4 py-2 text-sm font-semibold text-on-primary-fixed transition hover:opacity-90 active:scale-95"
+          className="cta-lift rounded-full bg-navy px-4 py-2.5 text-sm font-semibold text-white md:px-5"
         >
-          Hemen Başvur
+          Ücretsiz Deneme
         </Link>
       </div>
 
       {open && (
-        <div className="border-t border-outline-variant/20 bg-surface-low px-4 py-4 md:hidden">
+        <div className="border-t border-outline-variant/25 bg-white px-4 py-4 md:hidden">
           <nav className="flex flex-col gap-1" aria-label="Mobil menü">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-3 py-3 text-base font-semibold text-foreground hover:bg-surface-high"
+                className="rounded-xl px-3 py-3 text-base font-semibold text-navy hover:bg-surface-low"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
@@ -114,7 +96,7 @@ export function Header() {
               <Link
                 key={b.slug}
                 href={`/branslar/${b.slug}`}
-                className="rounded-lg px-3 py-3 text-base font-medium text-muted hover:bg-surface-high hover:text-foreground"
+                className="rounded-xl px-3 py-3 text-base font-medium text-muted hover:bg-surface-low hover:text-navy"
                 onClick={() => setOpen(false)}
               >
                 {b.name}

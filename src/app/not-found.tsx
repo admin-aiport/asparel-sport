@@ -7,9 +7,9 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <section className="mx-auto flex max-w-container flex-col items-center px-4 py-32 text-center md:px-10">
-      <p className="text-sm font-bold uppercase tracking-widest text-secondary">404</p>
-      <h1 className="mt-3 text-3xl font-extrabold text-foreground md:text-5xl">
+    <section className="mx-auto flex max-w-container flex-col items-center px-4 py-36 text-center md:px-10">
+      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-asp">404</p>
+      <h1 className="mt-3 font-display text-4xl font-bold text-navy md:text-6xl">
         Sayfa bulunamadı
       </h1>
       <p className="mt-4 max-w-md text-muted">
@@ -17,7 +17,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="mt-8 rounded-full bg-secondary-container px-6 py-3 text-sm font-semibold text-on-primary-fixed"
+        className="cta-lift mt-8 rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white"
       >
         Ana sayfaya dön
       </Link>

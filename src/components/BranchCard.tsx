@@ -13,7 +13,7 @@ export function BranchCard({ branch }: Props) {
   return (
     <Link
       href={`/branslar/${branch.slug}`}
-      className={`group relative block h-72 overflow-hidden rounded-2xl border border-outline-variant/40 shadow-lg accent-${branch.accent} md:h-80`}
+      className={`branch-glow group relative block h-[22rem] overflow-hidden rounded-3xl border border-outline-variant/35 accent-${branch.accent} md:h-[26rem]`}
     >
       {hasImage ? (
         <Image
@@ -21,53 +21,47 @@ export function BranchCard({ branch }: Props) {
           alt={branch.imageAlt ?? branch.name}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
       ) : (
         <div
           className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
           style={{
-            background: `linear-gradient(145deg, #ffffff 0%, ${branch.accentHex}33 45%, #eef2f8 100%)`,
+            background: `linear-gradient(155deg, #ffffff 0%, ${branch.accentHex}28 42%, #e8eef8 100%)`,
           }}
         />
       )}
       {hasImage ? (
-        <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/25 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/92 via-navy/30 to-transparent" />
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
       )}
-      <div
-        className={`absolute bottom-0 left-0 w-full p-5 transition-transform duration-300 group-hover:-translate-y-1 md:p-6 ${
-          hasImage
-            ? "bg-navy/55 backdrop-blur-md border-t border-white/10"
-            : "glass-panel"
-        }`}
-      >
-        <div className="flex items-center justify-between gap-3">
+      <div className="absolute inset-x-0 bottom-0 p-6 md:p-7">
+        <div className="flex items-end justify-between gap-4">
           <div>
             <span
-              className="mb-2 inline-block rounded-full border px-2 py-1 text-[10px] font-bold uppercase tracking-tighter"
-              style={{
-                borderColor: `${branch.accentHex}50`,
-                backgroundColor: `${branch.accentHex}22`,
-                color: hasImage ? "#fff" : branch.accentHex,
-              }}
+              className="mb-3 inline-block text-[11px] font-bold uppercase tracking-[0.14em]"
+              style={{ color: hasImage ? "rgba(255,255,255,0.75)" : branch.accentHex }}
             >
               {branch.ageRangeLabel}
             </span>
             <h3
-              className={`text-2xl font-bold md:text-3xl ${hasImage ? "text-white" : "text-foreground"}`}
+              className={`font-display text-3xl font-bold tracking-tight md:text-4xl ${
+                hasImage ? "text-white" : "text-navy"
+              }`}
             >
               {branch.name}
             </h3>
             <p
-              className={`mt-1 line-clamp-2 text-sm ${hasImage ? "text-white/80" : "text-muted"}`}
+              className={`mt-2 max-w-[16rem] text-sm leading-relaxed ${
+                hasImage ? "text-white/75" : "text-muted"
+              }`}
             >
               {branch.shortDescription}
             </p>
           </div>
           <div
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white shadow-lg"
             style={{ backgroundColor: branch.accentHex }}
           >
             <SportIcon name={branch.icon} />
@@ -86,12 +80,11 @@ export function ComingSoonCard({
   subtitle: string;
 }) {
   return (
-    <div className="relative flex h-48 flex-col items-center justify-center rounded-2xl border-2 border-dashed border-outline-variant/50 bg-surface-low text-muted md:h-80">
-      <span className="mb-2 text-4xl opacity-50" aria-hidden>
-        ···
-      </span>
-      <p className="text-sm font-bold uppercase tracking-widest">{name}</p>
-      <p className="mt-1 text-xs opacity-60">{subtitle}</p>
+    <div className="relative flex h-[22rem] flex-col items-center justify-center rounded-3xl border border-dashed border-outline-variant/60 bg-surface-low/80 text-muted md:h-[26rem]">
+      <p className="font-display text-sm font-bold uppercase tracking-[0.2em] text-arel/70">
+        {name}
+      </p>
+      <p className="mt-3 text-sm">{subtitle}</p>
     </div>
   );
 }

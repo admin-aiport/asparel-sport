@@ -20,13 +20,15 @@ export function SectionHeading({
   const alignClass = align === "center" ? "text-center items-center" : "text-left items-start";
 
   return (
-    <div className={`mb-8 flex flex-col gap-2 md:mb-10 ${alignClass} ${className}`}>
+    <div className={`mb-10 flex flex-col gap-3 md:mb-12 ${alignClass} ${className}`}>
       {eyebrow && (
-        <p className="text-xs font-bold uppercase tracking-widest text-secondary">{eyebrow}</p>
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-asp">{eyebrow}</p>
       )}
-      <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-4xl">{title}</h2>
+      <h2 className="font-display text-3xl font-bold tracking-tight text-navy md:text-5xl">
+        {title}
+      </h2>
       {description && (
-        <p className="max-w-xl text-base text-muted md:text-lg">{description}</p>
+        <p className="max-w-xl text-base leading-relaxed text-muted md:text-lg">{description}</p>
       )}
       {children}
     </div>

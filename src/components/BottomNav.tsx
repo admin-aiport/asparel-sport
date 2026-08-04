@@ -14,7 +14,7 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 z-50 w-full rounded-t-2xl border-t border-outline-variant/40 bg-white/95 shadow-[0_-4px_20px_rgba(11,29,66,0.08)] backdrop-blur-xl md:hidden"
+      className="fixed bottom-0 z-50 w-full rounded-t-3xl border-t border-outline-variant/40 bg-white/95 shadow-[0_-8px_30px_rgba(11,29,66,0.06)] backdrop-blur-xl md:hidden"
       aria-label="Alt navigasyon"
     >
       <div className="flex h-20 items-center justify-around px-4 pb-2">

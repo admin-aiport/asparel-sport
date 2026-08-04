@@ -8,7 +8,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "İletişim & Ücretsiz Deneme Dersi",
-  description: `Asparel Spor Kulübü iletişim — ${site.address.line}. Telefon ${site.phone}. Ücretsiz deneme dersi için hemen başvurun.`,
+  description: `Asparel Spor Kulübü — ${site.address.line}. ${site.phone}. Ücretsiz deneme dersi için hemen yazın.`,
   alternates: {
     canonical: "/iletisim",
   },
@@ -17,17 +17,17 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="px-4 pb-10 pt-28 md:px-10 md:pt-36">
+      <section className="px-4 pb-8 pt-28 md:px-10 md:pt-36">
         <div className="mx-auto max-w-container">
           <SectionHeading
             eyebrow="İletişim"
-            title="Bize Ulaşın"
-            description="Ücretsiz deneme dersi, branş seçimi veya salon ziyareti için formu doldurun ya da WhatsApp’tan yazın."
+            title="Hemen başlayalım"
+            description="Ücretsiz deneme, branş seçimi veya salon ziyareti için formu doldurun ya da WhatsApp’tan yazın."
           />
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-3">
             <a
               href={`tel:+${site.phoneE164}`}
-              className="rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+              className="cta-lift rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white"
             >
               {site.phone}
             </a>
@@ -35,7 +35,7 @@ export default function ContactPage() {
               href={site.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-whatsapp px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+              className="cta-lift rounded-full bg-whatsapp px-6 py-3 text-sm font-semibold text-white"
             >
               WhatsApp
             </Link>
@@ -43,7 +43,7 @@ export default function ContactPage() {
               href={site.mapsLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-outline-variant/50 px-6 py-3 text-sm font-semibold text-foreground transition hover:border-secondary hover:text-secondary"
+              className="rounded-full border border-outline-variant/50 px-6 py-3 text-sm font-semibold text-navy transition hover:border-arel hover:text-arel"
             >
               Yol Tarifi
             </a>
@@ -51,17 +51,19 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="px-4 pb-16 md:px-10">
-        <div className="mx-auto grid max-w-container gap-10 lg:grid-cols-2">
+      <section className="px-4 pb-16 md:px-10 md:pb-20">
+        <div className="mx-auto grid max-w-container gap-10 lg:grid-cols-2 lg:gap-14">
           <TrialForm />
           <div className="space-y-6">
-            <div className="glass-panel rounded-2xl p-6">
-              <h2 className="mb-3 text-xl font-bold">Şube Bilgisi</h2>
-              <p className="text-sm text-muted">{site.address.line}</p>
-              <p className="mt-2 text-sm text-muted">
-                Basketbol, voleybol ve jimnastik branşlarında altyapı eğitimi.
-              </p>
-              <div className="relative mt-4 h-56 overflow-hidden rounded-xl bg-surface-highest md:h-72">
+            <div className="overflow-hidden rounded-3xl border border-outline-variant/35 bg-white">
+              <div className="p-6 pb-4">
+                <h2 className="font-display text-xl font-bold text-navy">Şube</h2>
+                <p className="mt-2 text-sm text-muted">{site.address.line}</p>
+                <p className="mt-1 text-sm text-muted">
+                  Basketbol, voleybol ve jimnastik altyapı eğitimi.
+                </p>
+              </div>
+              <div className="relative h-56 md:h-72">
                 <iframe
                   title="Asparel Spor Kulübü harita"
                   src={site.mapsEmbedUrl}
@@ -72,26 +74,25 @@ export default function ContactPage() {
                 />
               </div>
             </div>
-            <div id="kvkk" className="rounded-2xl border border-outline-variant/30 bg-surface-high p-6 text-sm text-muted">
-              <h2 className="mb-2 text-base font-bold text-foreground">KVKK &amp; Gizlilik</h2>
+            <div
+              id="kvkk"
+              className="rounded-3xl border border-outline-variant/35 bg-surface-low p-6 text-sm leading-relaxed text-muted"
+            >
+              <h2 className="mb-2 font-display text-base font-bold text-navy">
+                KVKK &amp; Gizlilik
+              </h2>
               <p>
-                İletişim formunda paylaştığınız ad, telefon ve mesaj bilgileri yalnızca deneme
-                dersi ve bilgilendirme amacıyla kullanılır. Verileriniz üçüncü taraflarla
-                ticari amaçla paylaşılmaz. Talepleriniz için WhatsApp veya telefon hattımızdan
-                bize ulaşabilirsiniz.
+                Formdaki ad, telefon ve mesaj yalnızca deneme dersi ve bilgilendirme için
+                kullanılır; ticari amaçla üçüncü taraflarla paylaşılmaz.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-surface-low px-4 py-16 md:px-10">
+      <section className="border-t border-outline-variant/30 bg-surface-low/60 px-4 py-16 md:px-10 md:py-20">
         <div className="mx-auto max-w-3xl">
-          <SectionHeading
-            align="center"
-            eyebrow="SSS"
-            title="Sıkça Sorulan Sorular"
-          />
+          <SectionHeading align="center" eyebrow="SSS" title="Sıkça sorulan sorular" />
           <FaqAccordion items={faqs} />
         </div>
       </section>

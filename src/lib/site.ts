@@ -1,10 +1,10 @@
 export const site = {
   name: "Asparel Spor Kulübü",
   shortName: "ASPAREL",
-  tagline: "Geleceğin Sporcularını Yetiştiriyoruz",
+  tagline: "Güç, disiplin ve takım ruhu",
   description:
-    "Maltepe'de lisanslı antrenörler eşliğinde basketbol, voleybol ve jimnastik altyapı eğitimi. Ücretsiz deneme dersi için hemen başvurun.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://asparelspor.com",
+    "Maltepe’de basketbol, voleybol ve jimnastik altyapısı. Lisanslı antrenörler, yaşa özel programlar ve ücretsiz deneme dersi.",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://asparel.tr",
   phone: "0535 763 69 17",
   phoneE164: "905357636917",
   whatsappUrl: "https://wa.me/905357636917",

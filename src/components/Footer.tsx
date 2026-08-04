@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { BrandWordmark } from "@/components/BrandWordmark";
 import { site } from "@/lib/site";
 import { getActiveBranches } from "@/data/branches";
 
@@ -8,41 +8,30 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-16 border-t border-outline-variant/40 bg-white px-4 pb-8 pt-12 md:px-10">
-      <div className="mx-auto grid max-w-container gap-10 md:grid-cols-3">
+    <footer className="mt-20 border-t border-outline-variant/35 bg-white px-4 pb-10 pt-14 md:px-10">
+      <div className="mx-auto grid max-w-container gap-12 md:grid-cols-3">
         <div className="flex flex-col items-center text-center md:items-start md:text-left">
-          <div className="mb-3 flex items-center gap-2">
-            <Image
-              src="/brand/logo.png"
-              alt=""
-              width={48}
-              height={48}
-              className="h-12 w-12 object-contain"
-            />
-            <span className="text-2xl font-extrabold italic tracking-tighter text-foreground">
-              {site.shortName}
-            </span>
-          </div>
-          <p className="max-w-xs text-sm text-muted">{site.description}</p>
+          <BrandWordmark size="lg" className="mb-4" />
+          <p className="max-w-xs text-sm leading-relaxed text-muted">{site.description}</p>
         </div>
 
         <div className="text-center md:text-left">
-          <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-secondary">
+          <h2 className="mb-4 font-display text-sm font-bold uppercase tracking-[0.18em] text-arel">
             Branşlar
           </h2>
-          <ul className="space-y-2">
+          <ul className="space-y-2.5">
             {branches.map((b) => (
               <li key={b.slug}>
                 <Link
                   href={`/branslar/${b.slug}`}
-                  className="text-sm text-muted transition hover:text-secondary"
+                  className="text-sm text-muted transition hover:text-arel"
                 >
                   {b.name}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/iletisim" className="text-sm text-muted transition hover:text-secondary">
+              <Link href="/iletisim" className="text-sm text-muted transition hover:text-arel">
                 İletişim
               </Link>
             </li>
@@ -50,13 +39,13 @@ export function Footer() {
         </div>
 
         <div className="text-center md:text-left">
-          <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-secondary">
+          <h2 className="mb-4 font-display text-sm font-bold uppercase tracking-[0.18em] text-arel">
             İletişim
           </h2>
           <p className="text-sm text-muted">{site.address.line}</p>
           <a
             href={`tel:+${site.phoneE164}`}
-            className="mt-2 block text-lg font-bold text-foreground hover:text-secondary"
+            className="mt-3 block font-display text-xl font-bold text-navy hover:text-arel"
           >
             {site.phone}
           </a>
@@ -71,17 +60,17 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="mx-auto mt-10 flex max-w-container flex-col items-center gap-3 border-t border-outline-variant/20 pt-6 text-center">
+      <div className="mx-auto mt-12 flex max-w-container flex-col items-center gap-3 border-t border-outline-variant/25 pt-7 text-center">
         <div className="flex flex-wrap justify-center gap-6">
-          <Link href="/iletisim#kvkk" className="text-sm text-muted hover:text-secondary">
+          <Link href="/iletisim#kvkk" className="text-sm text-muted hover:text-arel">
             KVKK
           </Link>
-          <Link href="/iletisim#kvkk" className="text-sm text-muted hover:text-secondary">
+          <Link href="/iletisim#kvkk" className="text-sm text-muted hover:text-arel">
             Kullanım Koşulları
           </Link>
         </div>
-        <p className="text-sm text-muted opacity-60">
-          © {year} {site.name}. Tüm Hakları Saklıdır.
+        <p className="text-sm text-muted/70">
+          © {year} {site.name}. Tüm hakları saklıdır.
         </p>
       </div>
     </footer>

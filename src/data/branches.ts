@@ -27,44 +27,40 @@ export const branches: Branch[] = [
     slug: "basketbol",
     name: "Basketbol",
     shortDescription:
-      "Koordinasyon, takım oyunu ve altyapı takımlarıyla disiplinli basketbol eğitimi.",
+      "Top hakimiyeti, takım oyunu ve disiplinle lisanslı sporcu adımları.",
     longDescription:
-      "Asparel Basketbol branşında çocuklar ve gençler, temel top hakimiyetinden takım taktiklerine kadar aşamalı bir programla gelişir. Lisanslı antrenörler eşliğinde koordinasyon, çeviklik ve maç deneyimi odaklı antrenmanlar sunuyoruz.",
-    ageRangeLabel: "8-13 Yaş Grubu",
+      "Asparel Basketbol’da çocuklar yaş grubuna göre ilerler: temel koordinasyondan takım taktiklerine. Lisanslı antrenörlerle çeviklik, pas ve maç bilinci birlikte gelişir.",
+    ageRangeLabel: "8-13 Yaş",
     ageGroups: [
-      { label: "8-10 Yaş Grubu", subtitle: "Temel koordinasyon ve top hakimiyeti" },
-      { label: "11-12 Yaş Grubu", subtitle: "Takım oyunları ve temel taktikler" },
-      { label: "12-13 Yaş Grubu", subtitle: "Altyapı takımları ve performans" },
+      { label: "8-10 Yaş Grubu", subtitle: "Koordinasyon ve top hakimiyeti" },
+      { label: "11-12 Yaş Grubu", subtitle: "Takım oyunları ve temel taktik" },
+      { label: "12-13 Yaş Grubu", subtitle: "Performans ve maç hazırlığı" },
     ],
     accent: "basketball",
     accentHex: "#ee9800",
     icon: "basketball",
     highlights: [
-      "Koordinasyon ve çeviklik antrenmanları",
-      "Altyapı takımı deneyimi",
-      "Disiplin ve takım ruhu odaklı gelişim",
+      "Yaşa özel teknik ve koordinasyon",
+      "Takım ruhu ve disiplin odaklı antrenman",
+      "Lisanslı sporcu kariyerine sağlam temel",
     ],
-    progression: [
-      "Teknik Eğitim",
-      "Sağlıklı Gelişim",
-      "Başarılı Kariyer",
-    ],
+    progression: ["Teknik Eğitim", "Sağlıklı Gelişim", "Başarılı Kariyer"],
     seoTitle: "Maltepe Basketbol Kursu | Asparel Spor Kulübü",
     seoDescription:
-      "Maltepe'de 8-13 yaş basketbol kursu. Lisanslı antrenörler, altyapı takımları ve ücretsiz deneme dersi. Asparel Spor Kulübü.",
+      "Maltepe’de 8–13 yaş basketbol kursu. Lisanslı antrenörler, yaş grupları ve ücretsiz deneme dersi — Asparel Spor Kulübü.",
   },
   {
     slug: "voleybol",
     name: "Voleybol",
     shortDescription:
-      "Smaç, pas ve takım içi iletişimle lisanslı sporcu kariyerine ilk adım.",
+      "Pas, smaç ve iletişimle sahada özgüvenli bir oyun anlayışı.",
     longDescription:
-      "Voleybol branşımızda smaç ve pas teknikleri, blok çalışmaları ve takım içi iletişim ön plandadır. Yaş gruplarına özel programlarla çocuklar hem teknik hem de sosyal becerilerini geliştirir.",
-    ageRangeLabel: "8-13 Yaş Grubu",
+      "Voleybol branşımızda teknik (pas, manşet, smaç) ile takım içi iletişim birlikte çalışılır. Grup derslerinde çocuklar hem motor hem sosyal becerilerini güçlendirir.",
+    ageRangeLabel: "8-13 Yaş",
     ageGroups: [
       { label: "8-10 Yaş Grubu", subtitle: "Temel voleybol becerileri" },
-      { label: "11-12 Yaş Grubu", subtitle: "Pas, smaç ve takım oyunları" },
-      { label: "12-13 Yaş Grubu", subtitle: "Teknik derinleşme ve maç hazırlığı" },
+      { label: "11-12 Yaş Grubu", subtitle: "Pas, smaç ve takım oyunu" },
+      { label: "12-13 Yaş Grubu", subtitle: "Teknik derinleşme ve maç ritmi" },
     ],
     accent: "volleyball",
     accentHex: "#357df1",
@@ -73,32 +69,28 @@ export const branches: Branch[] = [
     imageAlt: "Asparel Voleybol — lisanslı sporcu kariyerine başla",
     highlights: [
       "Smaç ve pas teknikleri",
-      "Takım içi iletişim",
-      "Grup dersleri ve yaşa özel programlar",
+      "Takım içi iletişim ve oyun okuma",
+      "Yaş gruplarına özel grup dersleri",
     ],
-    progression: [
-      "Teknik Eğitim",
-      "Sağlıklı Gelişim",
-      "Başarılı Kariyer",
-    ],
+    progression: ["Teknik Eğitim", "Sağlıklı Gelişim", "Başarılı Kariyer"],
     seoTitle: "Maltepe Voleybol Kursu | Asparel Spor Kulübü",
     seoDescription:
-      "Maltepe'de 8-13 yaş voleybol kursu. Smaç, pas teknikleri ve lisanslı antrenörler. Ücretsiz deneme dersi için Asparel Spor Kulübü.",
+      "Maltepe’de 8–13 yaş voleybol kursu. Smaç, pas ve lisanslı antrenörler. Ücretsiz deneme dersi için Asparel.",
   },
   {
     slug: "jimnastik",
     name: "Jimnastik",
     shortDescription:
-      "Erken yaşta motor beceriler, esneklik ve eğlenceli temel spor eğitimi.",
+      "Erken yaşta motor beceri, esneklik ve eğlenceli hareket eğitimi.",
     longDescription:
-      "Jimnastik programımız erken yaş spor eğitimiyle temel motor becerileri, esneklik ve dengeyi güçlendirir. Lisanslı antrenörlerle oyun temelli ve güvenli bir ortamda çocuklar spora sevgiyle başlar.",
-    ageRangeLabel: "2-5 Yaş Grubu",
+      "Jimnastik programımız oyun ve hareketle başlar; denge, esneklik ve temel motor becerileri güvenli bir ortamda güçlendirir. Lisanslı antrenörlerle spor sevgisi erken yaşta kök salar.",
+    ageRangeLabel: "2-5 Yaş",
     ageGroups: [
       { label: "2-4 Yaş Grubu", subtitle: "Oyun ve Hareket" },
       { label: "4-5 Yaş Grubu", subtitle: "Temel Beceriler" },
     ],
     accent: "gymnastics",
-    accentHex: "#e31e24",
+    accentHex: "#e85a7a",
     icon: "gymnastics",
     image: "/brand/jimnastik-poster.png",
     imageAlt: "Asparel Jimnastik — lisanslı antrenörlerle sporcu temelleri",
@@ -107,20 +99,16 @@ export const branches: Branch[] = [
       "Esneklik ve denge",
       "Eğlenceli, güvenli erken yaş eğitimi",
     ],
-    progression: [
-      "Temel Motor Beceriler",
-      "Esneklik & Denge",
-      "Eğlenceli Eğitim",
-    ],
+    progression: ["Temel Motor Beceriler", "Esneklik & Denge", "Eğlenceli Eğitim"],
     seoTitle: "Maltepe Jimnastik Kursu | Asparel Spor Kulübü",
     seoDescription:
-      "Maltepe'de 2-5 yaş jimnastik kursu. Oyun, hareket ve temel beceriler. Lisanslı antrenörlerle ücretsiz deneme dersi.",
+      "Maltepe’de 2–5 yaş jimnastik. Oyun, hareket ve temel beceriler. Lisanslı antrenörlerle ücretsiz deneme dersi.",
   },
 ];
 
 export const comingSoonBranches = [
   {
-    name: "Yakında Yeni Branşlar",
+    name: "Yakında",
     subtitle: "Tenis & Futbol Akademisi",
   },
 ] as const;

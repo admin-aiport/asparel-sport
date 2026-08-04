@@ -1,4 +1,4 @@
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Syne } from "next/font/google";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -14,6 +14,13 @@ const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin", "latin-ext"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -65,7 +72,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" className={`${plusJakarta.variable} h-full`}>
+    <html lang="tr" className={`${plusJakarta.variable} ${syne.variable} h-full`}>
       <body className="relative flex min-h-full flex-col font-sans antialiased pb-24 md:pb-0">
         <KineticBackground />
         <JsonLd />
