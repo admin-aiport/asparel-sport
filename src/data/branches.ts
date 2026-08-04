@@ -45,9 +45,9 @@ export const branches: Branch[] = [
       "Lisanslı sporcu kariyerine sağlam temel",
     ],
     progression: ["Teknik Eğitim", "Sağlıklı Gelişim", "Başarılı Kariyer"],
-    seoTitle: "Maltepe Basketbol Kursu | Asparel Spor Kulübü",
+    seoTitle: "Gaziemir Basketbol Kursu | Asparel Spor Kulübü İzmir",
     seoDescription:
-      "Maltepe’de 8–13 yaş basketbol kursu. Lisanslı antrenörler, yaş grupları ve ücretsiz deneme dersi — Asparel Spor Kulübü.",
+      "Gaziemir İzmir’de 8–13 yaş basketbol kursu. Lisanslı antrenörler, yaş grupları ve ücretsiz deneme dersi — Asparel Spor Kulübü.",
   },
   {
     slug: "voleybol",
@@ -73,9 +73,9 @@ export const branches: Branch[] = [
       "Yaş gruplarına özel grup dersleri",
     ],
     progression: ["Teknik Eğitim", "Sağlıklı Gelişim", "Başarılı Kariyer"],
-    seoTitle: "Maltepe Voleybol Kursu | Asparel Spor Kulübü",
+    seoTitle: "Gaziemir Voleybol Kursu | Asparel Spor Kulübü İzmir",
     seoDescription:
-      "Maltepe’de 8–13 yaş voleybol kursu. Smaç, pas ve lisanslı antrenörler. Ücretsiz deneme dersi için Asparel.",
+      "Gaziemir İzmir’de 8–13 yaş voleybol kursu. Smaç, pas ve lisanslı antrenörler. Ücretsiz deneme dersi için Asparel.",
   },
   {
     slug: "jimnastik",
@@ -100,9 +100,9 @@ export const branches: Branch[] = [
       "Eğlenceli, güvenli erken yaş eğitimi",
     ],
     progression: ["Temel Motor Beceriler", "Esneklik & Denge", "Eğlenceli Eğitim"],
-    seoTitle: "Maltepe Jimnastik Kursu | Asparel Spor Kulübü",
+    seoTitle: "Gaziemir Jimnastik Kursu | Asparel Spor Kulübü İzmir",
     seoDescription:
-      "Maltepe’de 2–5 yaş jimnastik. Oyun, hareket ve temel beceriler. Lisanslı antrenörlerle ücretsiz deneme dersi.",
+      "Gaziemir İzmir’de 2–5 yaş jimnastik. Oyun, hareket ve temel beceriler. Lisanslı antrenörlerle ücretsiz deneme dersi.",
   },
 ];
 

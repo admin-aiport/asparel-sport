@@ -7,10 +7,21 @@ import { faqs } from "@/data/faq";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "İletişim & Ücretsiz Deneme Dersi",
-  description: `Asparel Spor Kulübü — ${site.address.line}. ${site.phone}. Ücretsiz deneme dersi için hemen yazın.`,
+  title: "İzmir Gaziemir İletişim & Ücretsiz Deneme Dersi",
+  description: `Asparel Spor Kulübü İzmir Gaziemir iletişim — ${site.address.line}. ${site.phone}. Basketbol, voleybol ve jimnastik için ücretsiz deneme dersi randevusu alın.`,
+  keywords: [
+    "Asparel Spor Kulübü iletişim",
+    "Gaziemir deneme dersi",
+    "İzmir spor kulübü iletişim",
+    "Gaziemir basketbol deneme",
+  ],
   alternates: {
     canonical: "/iletisim",
+  },
+  openGraph: {
+    title: "İzmir Gaziemir İletişim & Ücretsiz Deneme Dersi | Asparel",
+    description: `Asparel Spor Kulübü — ${site.address.line}. Ücretsiz deneme dersi için hemen yazın.`,
+    url: `${site.url}/iletisim`,
   },
 };
 

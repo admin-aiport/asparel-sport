@@ -10,22 +10,30 @@ export function JsonLd() {
     description: site.description,
     url: site.url,
     telephone: `+${site.phoneE164}`,
+    email: site.email,
     image: `${site.url}/brand/logo.png`,
     address: {
       "@type": "PostalAddress",
+      streetAddress: site.address.street,
       addressLocality: site.address.district,
-      addressRegion: site.address.city,
+      addressRegion: site.address.region,
       addressCountry: site.address.country,
-      streetAddress: site.address.line,
     },
     geo: {
       "@type": "GeoCoordinates",
-      addressCountry: "TR",
+      latitude: site.geo.latitude,
+      longitude: site.geo.longitude,
     },
-    areaServed: {
-      "@type": "Place",
-      name: "Maltepe, İstanbul",
-    },
+    areaServed: [
+      {
+        "@type": "AdministrativeArea",
+        name: "Gaziemir",
+      },
+      {
+        "@type": "City",
+        name: "İzmir",
+      },
+    ],
     sameAs: [site.whatsappUrl],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -37,6 +45,10 @@ export function JsonLd() {
           name: `${b.name} Eğitimi`,
           description: b.shortDescription,
           url: `${site.url}/branslar/${b.slug}`,
+          areaServed: {
+            "@type": "Place",
+            name: "Gaziemir, İzmir",
+          },
         },
       })),
     },

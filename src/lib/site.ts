@@ -3,22 +3,28 @@ export const site = {
   shortName: "ASPAREL",
   tagline: "Güç, disiplin ve takım ruhu",
   description:
-    "Maltepe’de basketbol, voleybol ve jimnastik altyapısı. Lisanslı antrenörler, yaşa özel programlar ve ücretsiz deneme dersi.",
+    "İzmir Gaziemir’de basketbol, voleybol ve jimnastik altyapısı. Lisanslı antrenörler, yaşa özel programlar ve ücretsiz deneme dersi.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://asparel.tr",
   phone: "0535 763 69 17",
   phoneE164: "905357636917",
   whatsappUrl: "https://wa.me/905357636917",
   email: "info@asparelspor.com",
   address: {
-    line: "Zümrütevler, Maltepe / İstanbul",
-    district: "Maltepe",
-    city: "İstanbul",
+    line: "Gaziemir / İzmir",
+    street: "Gaziemir",
+    district: "Gaziemir",
+    city: "İzmir",
+    region: "İzmir",
     country: "TR",
   },
+  geo: {
+    latitude: 38.3214,
+    longitude: 27.1281,
+  },
   mapsEmbedUrl:
-    "https://www.google.com/maps?q=Z%C3%BCmr%C3%BCtevler+Maltepe+%C4%B0stanbul&output=embed",
+    "https://www.google.com/maps?q=Gaziemir+%C4%B0zmir&output=embed",
   mapsLink:
-    "https://www.google.com/maps/search/?api=1&query=Z%C3%BCmr%C3%BCtevler+Maltepe+%C4%B0stanbul",
+    "https://www.google.com/maps/search/?api=1&query=Gaziemir+%C4%B0zmir",
   social: {
     instagram: "#",
   },

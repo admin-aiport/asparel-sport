@@ -27,6 +27,6 @@ export const faqs: FaqItem[] = [
   {
     question: "Salon nerede?",
     answer:
-      "Zümrütevler, Maltepe / İstanbul. Harita ve yol tarifi iletişim sayfasında.",
+      "Gaziemir / İzmir. Harita ve yol tarifi iletişim sayfasında.",
   },
 ];

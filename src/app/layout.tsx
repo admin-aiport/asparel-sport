@@ -27,22 +27,32 @@ const syne = Syne({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.tagline}`,
+    default: `${site.name} | İzmir Gaziemir Spor Kulübü`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  applicationName: site.name,
   openGraph: {
     type: "website",
     locale: "tr_TR",
+    url: site.url,
     siteName: site.name,
-    title: site.name,
+    title: `${site.name} | İzmir Gaziemir Basketbol, Voleybol & Jimnastik`,
     description: site.description,
-    images: [{ url: "/brand/logo.png", width: 512, height: 512, alt: site.name }],
+    images: [
+      {
+        url: "/brand/logo.png",
+        width: 512,
+        height: 512,
+        alt: `${site.name} — İzmir Gaziemir`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: site.name,
+    title: `${site.name} | İzmir Gaziemir Spor Kulübü`,
     description: site.description,
+    images: ["/brand/logo.png"],
   },
   alternates: {
     canonical: "/",
@@ -50,6 +60,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   icons: {
     icon: [{ url: "/brand/logo.png", type: "image/png" }],
@@ -57,13 +74,19 @@ export const metadata: Metadata = {
     shortcut: "/brand/logo.png",
   },
   keywords: [
-    "Maltepe basketbol kursu",
-    "Maltepe voleybol kursu",
-    "Maltepe jimnastik kursu",
+    "İzmir spor kulübü",
+    "Gaziemir spor kulübü",
+    "Gaziemir basketbol kursu",
+    "Gaziemir voleybol kursu",
+    "Gaziemir jimnastik kursu",
+    "İzmir basketbol kursu",
+    "İzmir voleybol kursu",
+    "İzmir jimnastik kursu",
     "Asparel Spor Kulübü",
-    "çocuk spor akademisi",
+    "çocuk spor akademisi İzmir",
     "ücretsiz deneme dersi",
   ],
+  category: "sports",
 };
 
 export default function RootLayout({

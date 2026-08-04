@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { BranchCard, ComingSoonCard } from "@/components/BranchCard";
 import { FaqAccordion } from "@/components/FaqAccordion";
@@ -8,6 +9,21 @@ import { TrialForm } from "@/components/TrialForm";
 import { comingSoonBranches, getActiveBranches } from "@/data/branches";
 import { faqs } from "@/data/faq";
 import { site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: `${site.name} | İzmir Gaziemir Spor Kulübü`,
+  },
+  description: site.description,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: `${site.name} | İzmir Gaziemir Spor Kulübü`,
+    description: site.description,
+    url: site.url,
+  },
+};
 
 export default function HomePage() {
   const branches = getActiveBranches();
@@ -35,7 +51,7 @@ export default function HomePage() {
               <BrandWordmark size="hero" href={null} showLogo className="!items-start gap-4 md:gap-6" />
             </div>
             <p className="reveal reveal-delay-2 max-w-md text-lg leading-relaxed text-muted md:text-xl">
-              Maltepe’de lisanslı antrenörlerle basketbol, voleybol ve jimnastik.
+              Gaziemir’de lisanslı antrenörlerle basketbol, voleybol ve jimnastik.
               Disiplinli altyapı, güvenli salon, ücretsiz deneme dersi.
             </p>
             <div className="reveal reveal-delay-3 mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -115,7 +131,7 @@ export default function HomePage() {
               <span className="text-coral">→</span>
               <span>Başarılı Kariyer</span>
               <span className="text-asp">·</span>
-              <span>Maltepe</span>
+              <span>Gaziemir İzmir</span>
               <span className="text-coral">→</span>
               <span>Ücretsiz Deneme</span>
               <span className="text-asp">·</span>
@@ -142,7 +158,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div>
-            <SectionHeading eyebrow="Lokasyon" title="Maltepe’deyiz" />
+            <SectionHeading eyebrow="Lokasyon" title="Gaziemir’deyiz" />
             <div className="overflow-hidden rounded-3xl border border-outline-variant/35 bg-white">
               <div className="relative h-56 md:h-72">
                 <iframe

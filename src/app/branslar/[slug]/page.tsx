@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { TrialForm } from "@/components/TrialForm";
 import { SportIcon } from "@/components/SportIcon";
 import { branches, getBranchBySlug } from "@/data/branches";
+import { site } from "@/lib/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -19,11 +20,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const branch = getBranchBySlug(slug);
   if (!branch) return {};
   return {
-    title: branch.seoTitle,
+    title: { absolute: branch.seoTitle },
     description: branch.seoDescription,
+    keywords: [
+      `Gaziemir ${branch.name.toLowerCase()} kursu`,
+      `İzmir ${branch.name.toLowerCase()} kursu`,
+      `Asparel ${branch.name}`,
+      "ücretsiz deneme dersi",
+    ],
     openGraph: {
       title: branch.seoTitle,
       description: branch.seoDescription,
+      url: `${site.url}/branslar/${branch.slug}`,
       images: branch.image ? [{ url: branch.image, alt: branch.imageAlt }] : undefined,
     },
     alternates: {
