@@ -18,8 +18,8 @@ const sizes = {
     sub: "text-[10px] md:text-[11px]",
   },
   md: {
-    logo: "h-10 w-10 md:h-11 md:w-11",
-    logoPx: 44,
+    logo: "h-12 w-12 md:h-14 md:w-14",
+    logoPx: 56,
     name: "text-lg md:text-xl",
     sub: "text-[10px] md:text-[11px]",
   },
@@ -58,15 +58,16 @@ export function BrandWordmark({
         />
       )}
       <span className="flex flex-col leading-none">
-        <span className={`font-display font-bold tracking-tight ${s.name}`}>
+        <span className={`font-display font-bold uppercase tracking-tight ${s.name}`}>
           <span className="text-asp">ASP</span>
           <span className="text-arel">AREL</span>
         </span>
         {showSubtitle && (
           <span
-            className={`mt-1.5 font-semibold uppercase text-asp ${s.sub} ${size === "hero" ? "" : "tracking-[0.16em]"}`}
+            className={`mt-0.5 font-semibold uppercase tracking-[0.14em] ${s.sub} ${size === "hero" ? "mt-1 tracking-[0.2em]" : ""}`}
           >
-            Spor Kulübü
+            <span className="text-asp">SPOR</span>
+            <span className="text-arel"> KULÜBÜ</span>
           </span>
         )}
       </span>

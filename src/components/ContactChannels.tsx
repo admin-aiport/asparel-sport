@@ -60,7 +60,7 @@ export function ContactChannels({ variant = "footer" }: ContactChannelsProps) {
               href={`mailto:${site.email}`}
               className="inline-flex items-center gap-2 font-medium text-navy transition hover:text-arel"
             >
-              <EmailIcon className="h-4 w-4 text-muted" />
+              <EmailIcon className="h-5 w-5" />
               {site.email}
             </a>
           </li>
@@ -71,7 +71,7 @@ export function ContactChannels({ variant = "footer" }: ContactChannelsProps) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 font-medium text-navy transition hover:text-arel"
             >
-              <InstagramIcon className="h-4 w-4 text-muted" />
+              <InstagramIcon className="h-5 w-5" />
               Instagram {site.social.instagramHandle}
             </Link>
           </li>
@@ -82,7 +82,7 @@ export function ContactChannels({ variant = "footer" }: ContactChannelsProps) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 font-medium text-navy transition hover:text-arel"
             >
-              <NsosyalIcon className="h-4 w-4 text-muted" />
+              <NsosyalIcon className="h-5 w-5" />
               Nsosyal {site.social.nsosyalHandle}
             </Link>
           </li>
@@ -122,28 +122,28 @@ export function ContactChannels({ variant = "footer" }: ContactChannelsProps) {
         </Link>
         <a
           href={`mailto:${site.email}`}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-navy text-white transition hover:opacity-90"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white p-1 shadow-sm ring-1 ring-outline-variant/40 transition hover:opacity-90"
           aria-label={`E-posta: ${site.email}`}
         >
-          <EmailIcon className="h-4 w-4" />
+          <EmailIcon className="h-7 w-7" />
         </a>
         <Link
           href={site.social.instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#E1306C] text-white transition hover:opacity-90"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white p-1 shadow-sm ring-1 ring-outline-variant/40 transition hover:opacity-90"
           aria-label={`Instagram ${site.social.instagramHandle}`}
         >
-          <InstagramIcon className="h-4 w-4" />
+          <InstagramIcon className="h-7 w-7" />
         </Link>
         <Link
           href={site.social.nsosyal}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-arel text-white transition hover:opacity-90"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white p-1.5 shadow-sm ring-1 ring-outline-variant/40 transition hover:opacity-90"
           aria-label={`Nsosyal ${site.social.nsosyalHandle}`}
         >
-          <NsosyalIcon className="h-4 w-4" />
+          <NsosyalIcon className="h-7 w-7" />
         </Link>
       </div>
 

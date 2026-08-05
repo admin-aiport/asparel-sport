@@ -28,20 +28,32 @@ export function BipIcon({ className = "h-5 w-5" }: IconProps) {
 
 export function InstagramIcon({ className = "h-5 w-5" }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M12 7.2A4.8 4.8 0 1016.8 12 4.81 4.81 0 0012 7.2zm0 7.92A3.12 3.12 0 1115.12 12 3.13 3.13 0 0112 15.12z" />
-      <circle cx="17.34" cy="6.72" r="1.12" />
-      <path d="M12 2.16c-2.68 0-3.01.01-4.07.06a7.12 7.12 0 00-2.35.45 4.74 4.74 0 00-1.71 1.11 4.74 4.74 0 00-1.11 1.71 7.12 7.12 0 00-.45 2.35c-.05 1.06-.06 1.39-.06 4.07s.01 3.01.06 4.07a7.12 7.12 0 00.45 2.35 4.74 4.74 0 001.11 1.71 4.74 4.74 0 001.71 1.11 7.12 7.12 0 002.35.45c1.06.05 1.39.06 4.07.06s3.01-.01 4.07-.06a7.12 7.12 0 002.35-.45 4.94 4.94 0 002.82-2.82 7.12 7.12 0 00.45-2.35c.05-1.06.06-1.39.06-4.07s-.01-3.01-.06-4.07a7.12 7.12 0 00-.45-2.35 4.74 4.74 0 00-1.11-1.71 4.74 4.74 0 00-1.71-1.11 7.12 7.12 0 00-2.35-.45c-1.06-.05-1.39-.06-4.07-.06zm0 1.62c2.63 0 2.94.01 3.98.06a5.5 5.5 0 011.83.34 3.12 3.12 0 011.79 1.79 5.5 5.5 0 01.34 1.83c.05 1.04.06 1.35.06 3.98s-.01 2.94-.06 3.98a5.5 5.5 0 01-.34 1.83 3.12 3.12 0 01-1.79 1.79 5.5 5.5 0 01-1.83.34c-1.04.05-1.35.06-3.98.06s-2.94-.01-3.98-.06a5.5 5.5 0 01-1.83-.34 3.12 3.12 0 01-1.79-1.79 5.5 5.5 0 01-.34-1.83c-.05-1.04-.06-1.35-.06-3.98s.01-2.94.06-3.98a5.5 5.5 0 01.34-1.83 3.12 3.12 0 011.79-1.79 5.5 5.5 0 011.83-.34c1.04-.05 1.35-.06 3.98-.06z" />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/brand/instagram-logo.png"
+      alt=""
+      className={`object-contain ${className}`}
+      width={32}
+      height={32}
+      decoding="async"
+      aria-hidden
+    />
   );
 }
 
-/** Stylized N for Nsosyal */
+/** Official NSosyal logo PNG (nsosyal.com) */
 export function NsosyalIcon({ className = "h-5 w-5" }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M6.5 4.5h3.2l4.6 9.4V4.5h3.2v15h-3.2l-4.6-9.4v9.4H6.5v-15z" />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/brand/nsosyal-logo.png"
+      alt=""
+      className={`object-contain ${className}`}
+      width={32}
+      height={32}
+      decoding="async"
+      aria-hidden
+    />
   );
 }
 
@@ -60,23 +72,15 @@ export function PhoneIcon({ className = "h-5 w-5" }: IconProps) {
 
 export function EmailIcon({ className = "h-5 w-5" }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <rect
-        x="3.5"
-        y="5.5"
-        width="17"
-        height="13"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth="1.75"
-      />
-      <path
-        d="M4.5 7.5L12 13l7.5-5.5"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/brand/email-icon.png"
+      alt=""
+      className={`object-contain ${className}`}
+      width={32}
+      height={32}
+      decoding="async"
+      aria-hidden
+    />
   );
 }
