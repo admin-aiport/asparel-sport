@@ -34,7 +34,12 @@ export function JsonLd() {
         name: "İzmir",
       },
     ],
-    sameAs: [site.whatsappUrl],
+    sameAs: [
+      site.whatsappUrl,
+      site.bipUrl,
+      site.social.instagram,
+      site.social.nsosyal,
+    ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Spor Branşları",

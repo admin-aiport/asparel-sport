@@ -8,7 +8,9 @@ export const site = {
   phone: "0535 763 69 17",
   phoneE164: "905357636917",
   whatsappUrl: "https://wa.me/905357636917",
-  email: "info@asparelspor.com",
+  /** BiP has no public wa.me-style chat deep link; web.bip.com opens BiP Web (best available). */
+  bipUrl: "https://web.bip.com",
+  email: "antrenor@asparel.tr",
   address: {
     line: "Gaziemir / İzmir",
     street: "Gaziemir",
@@ -26,7 +28,10 @@ export const site = {
   mapsLink:
     "https://www.google.com/maps/search/?api=1&query=Gaziemir+%C4%B0zmir",
   social: {
-    instagram: "#",
+    instagram: "https://instagram.com/asparelspor",
+    nsosyal: "https://nsosyal.com/@asparelspor",
+    instagramHandle: "@asparelspor",
+    nsosyalHandle: "@asparelspor",
   },
 } as const;
 

@@ -12,7 +12,7 @@ export const faqs: FaqItem[] = [
   {
     question: "Hangi yaş grupları kabul ediliyor?",
     answer:
-      "Jimnastik 2–5, basketbol ve voleybol 8–13 yaş. Detaylar her branş sayfasında.",
+      "Jimnastik 2–11, basketbol ve voleybol 8–13 yaş. Detaylar her branş sayfasında.",
   },
   {
     question: "Servis var mı?",

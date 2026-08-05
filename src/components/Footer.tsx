@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrandWordmark } from "@/components/BrandWordmark";
+import { ContactChannels } from "@/components/ContactChannels";
 import { site } from "@/lib/site";
 import { getActiveBranches } from "@/data/branches";
 
@@ -42,21 +43,7 @@ export function Footer() {
           <h2 className="mb-4 font-display text-sm font-bold uppercase tracking-[0.18em] text-arel">
             İletişim
           </h2>
-          <p className="text-sm text-muted">{site.address.line}</p>
-          <a
-            href={`tel:+${site.phoneE164}`}
-            className="mt-3 block font-display text-xl font-bold text-navy hover:text-arel"
-          >
-            {site.phone}
-          </a>
-          <Link
-            href={site.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 inline-block text-sm font-semibold text-whatsapp hover:opacity-80"
-          >
-            WhatsApp ile yazın
-          </Link>
+          <ContactChannels variant="footer" />
         </div>
       </div>
 

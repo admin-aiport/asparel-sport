@@ -81,13 +81,16 @@ export const branches: Branch[] = [
     slug: "jimnastik",
     name: "Jimnastik",
     shortDescription:
-      "Erken yaşta motor beceri, esneklik ve eğlenceli hareket eğitimi.",
+      "2–11 yaş motor beceri, esneklik, denge ve eğlenceli hareket eğitimi.",
     longDescription:
-      "Jimnastik programımız oyun ve hareketle başlar; denge, esneklik ve temel motor becerileri güvenli bir ortamda güçlendirir. Lisanslı antrenörlerle spor sevgisi erken yaşta kök salar.",
-    ageRangeLabel: "2-5 Yaş",
+      "Jimnastik programımız 2–11 yaş arası çocuklara yöneliktir. Oyun ve hareketle başlar; koordinasyon, temel hareketler, esneklik, denge ve teknik beceriler yaş gruplarına göre güvenli bir ortamda gelişir. Lisanslı antrenörlerle spor sevgisi erken yaşta kök salar.",
+    ageRangeLabel: "2-11 Yaş",
     ageGroups: [
-      { label: "2-4 Yaş Grubu", subtitle: "Oyun ve Hareket" },
-      { label: "4-5 Yaş Grubu", subtitle: "Temel Beceriler" },
+      { label: "2-3 Yaş Grubu", subtitle: "Oyun ve Hareket" },
+      { label: "4-5 Yaş Grubu", subtitle: "Koordinasyon" },
+      { label: "6-7 Yaş Grubu", subtitle: "Temel Hareketler" },
+      { label: "8-9 Yaş Grubu", subtitle: "Esneklik ve Denge" },
+      { label: "10-11 Yaş Grubu", subtitle: "Teknik Beceriler" },
     ],
     accent: "gymnastics",
     accentHex: "#e85a7a",
@@ -102,7 +105,7 @@ export const branches: Branch[] = [
     progression: ["Temel Motor Beceriler", "Esneklik & Denge", "Eğlenceli Eğitim"],
     seoTitle: "Gaziemir Jimnastik Kursu | Asparel Spor Kulübü İzmir",
     seoDescription:
-      "Gaziemir İzmir’de 2–5 yaş jimnastik. Oyun, hareket ve temel beceriler. Lisanslı antrenörlerle ücretsiz deneme dersi.",
+      "Gaziemir İzmir’de 2–11 yaş jimnastik. Oyun, koordinasyon, esneklik ve teknik beceriler. Lisanslı antrenörlerle ücretsiz deneme dersi.",
   },
 ];
 

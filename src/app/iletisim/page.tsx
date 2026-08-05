@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { ContactChannels } from "@/components/ContactChannels";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TrialForm } from "@/components/TrialForm";
@@ -33,32 +33,9 @@ export default function ContactPage() {
           <SectionHeading
             eyebrow="İletişim"
             title="Hemen başlayalım"
-            description="Ücretsiz deneme, branş seçimi veya salon ziyareti için formu doldurun ya da WhatsApp’tan yazın."
+            description="Ücretsiz deneme, branş seçimi veya salon ziyareti için formu doldurun; WhatsApp veya BiP’ten yazın."
           />
-          <div className="flex flex-wrap gap-3">
-            <a
-              href={`tel:+${site.phoneE164}`}
-              className="cta-lift rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white"
-            >
-              {site.phone}
-            </a>
-            <Link
-              href={site.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-lift rounded-full bg-whatsapp px-6 py-3 text-sm font-semibold text-white"
-            >
-              WhatsApp
-            </Link>
-            <a
-              href={site.mapsLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-outline-variant/50 px-6 py-3 text-sm font-semibold text-navy transition hover:border-arel hover:text-arel"
-            >
-              Yol Tarifi
-            </a>
-          </div>
+          <ContactChannels variant="page" />
         </div>
       </section>
 
