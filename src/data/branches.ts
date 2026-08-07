@@ -95,7 +95,7 @@ export const branches: Branch[] = [
     accent: "gymnastics",
     accentHex: "#e85a7a",
     icon: "gymnastics",
-    image: "/brand/jimnastik-poster.png",
+    image: "/brand/jimnastik-poster.jpg",
     imageAlt: "Asparel Jimnastik — lisanslı antrenörlerle sporcu temelleri",
     highlights: [
       "Temel motor beceriler",

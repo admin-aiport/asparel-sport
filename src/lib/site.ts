@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 export const site = {
   name: "Asparel Spor Kulübü",
   shortName: "ASPAREL",
@@ -32,8 +34,28 @@ export const site = {
     nsosyal: "https://nsosyal.com/@asparelspor",
     instagramHandle: "@asparelspor",
     nsosyalHandle: "@asparelspor",
+    /** Same handle on both platforms, shown once where the icons identify the platform. */
+    handle: "@asparelspor",
   },
 } as const;
+
+export const ogImage = {
+  url: "/brand/og-image.png",
+  width: 1200,
+  height: 630,
+  alt: `${site.name} — İzmir Gaziemir`,
+};
+
+/**
+ * Next merges `openGraph` shallowly, so a segment that sets it replaces the whole
+ * object from its parent. Every segment must respread these defaults.
+ */
+export const openGraphDefaults = {
+  type: "website",
+  locale: "tr_TR",
+  siteName: site.name,
+  images: [ogImage],
+} satisfies NonNullable<Metadata["openGraph"]>;
 
 export function whatsappTrialMessage(params?: {
   name?: string;

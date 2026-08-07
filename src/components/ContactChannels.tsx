@@ -10,164 +10,120 @@ import {
 import { site } from "@/lib/site";
 
 type ContactChannelsProps = {
-  /** Compact icon row (footer) vs fuller action buttons (contact page) */
+  /** Footer centers on mobile and shows the phone as plain text; the page uses a CTA pill. */
   variant?: "footer" | "page";
 };
 
-export function ContactChannels({ variant = "footer" }: ContactChannelsProps) {
-  if (variant === "page") {
-    return (
-      <div className="space-y-5">
-        <div className="flex flex-wrap gap-3">
-          <a
-            href={`tel:+${site.phoneE164}`}
-            className="cta-lift inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white"
-          >
-            <PhoneIcon className="h-4 w-4" />
-            {site.phone}
-          </a>
-          <Link
-            href={site.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cta-lift inline-flex items-center gap-2 rounded-full bg-whatsapp px-5 py-3 text-sm font-semibold text-white"
-          >
-            <WhatsAppIcon className="h-5 w-5" />
-            WhatsApp
-          </Link>
-          <Link
-            href={site.bipUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cta-lift inline-flex items-center gap-2 rounded-full border border-outline-variant/40 bg-white px-5 py-3 text-sm font-semibold text-navy"
-          >
-            <BipIcon className="h-6 w-6" />
-            BiP
-          </Link>
-          <a
-            href={site.mapsLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center rounded-full border border-outline-variant/50 px-5 py-3 text-sm font-semibold text-navy transition hover:border-arel hover:text-arel"
-          >
-            Yol Tarifi
-          </a>
-        </div>
+/** Every brand logo PNG is full-bleed square art, so one shared size keeps them uniform. */
+const iconButtonClass =
+  "inline-flex h-10 w-10 items-center justify-center rounded-full bg-white p-1.5 shadow-sm ring-1 ring-outline-variant/40 transition hover:opacity-90";
+const iconClass = "h-7 w-7";
+const textClass = "ml-1 text-sm text-muted";
 
-        <ul className="flex flex-col gap-2.5 text-sm">
-          <li>
-            <a
-              href={`mailto:${site.email}`}
-              className="inline-flex items-center gap-2 font-medium text-navy transition hover:text-arel"
-            >
-              <EmailIcon className="h-5 w-5" />
-              {site.email}
-            </a>
-          </li>
-          <li>
-            <Link
-              href={site.social.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-medium text-navy transition hover:text-arel"
-            >
-              <InstagramIcon className="h-5 w-5" />
-              Instagram {site.social.instagramHandle}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={site.social.nsosyal}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-medium text-navy transition hover:text-arel"
-            >
-              <NsosyalIcon className="h-5 w-5" />
-              Nsosyal {site.social.nsosyalHandle}
-            </Link>
-          </li>
-        </ul>
-      </div>
-    );
-  }
+function ChannelRows({
+  phone,
+  centerOnMobile,
+}: {
+  phone: React.ReactNode;
+  centerOnMobile?: boolean;
+}) {
+  const rowClass = `flex flex-wrap items-center gap-2${
+    centerOnMobile ? " justify-center md:justify-start" : ""
+  }`;
 
   return (
-    <div className="space-y-3">
-      <p className="text-sm text-muted">{site.address.line}</p>
-      <a
-        href={`tel:+${site.phoneE164}`}
-        className="block font-display text-xl font-bold text-navy hover:text-arel"
-      >
-        {site.phone}
-      </a>
-
-      <div className="flex flex-wrap items-center justify-center gap-2 md:justify-start">
-        <Link
-          href={site.whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-whatsapp text-white transition hover:opacity-90"
-          aria-label="WhatsApp ile yazın"
-        >
-          <WhatsAppIcon className="h-5 w-5" />
-        </Link>
+    <ul className="space-y-3">
+      <li className={rowClass}>
         <Link
           href={site.bipUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-outline-variant/40 transition hover:opacity-90"
+          className={iconButtonClass}
           aria-label="BiP ile yazın"
         >
-          <BipIcon className="h-8 w-8" />
+          <BipIcon className={iconClass} />
         </Link>
-        <a
-          href={`mailto:${site.email}`}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white p-1 shadow-sm ring-1 ring-outline-variant/40 transition hover:opacity-90"
-          aria-label={`E-posta: ${site.email}`}
-        >
-          <EmailIcon className="h-7 w-7" />
-        </a>
         <Link
-          href={site.social.instagram}
+          href={site.whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white p-1 shadow-sm ring-1 ring-outline-variant/40 transition hover:opacity-90"
-          aria-label={`Instagram ${site.social.instagramHandle}`}
+          className={iconButtonClass}
+          aria-label="WhatsApp ile yazın"
         >
-          <InstagramIcon className="h-7 w-7" />
+          <WhatsAppIcon className={iconClass} />
         </Link>
+        {phone}
+      </li>
+
+      <li className={rowClass}>
         <Link
           href={site.social.nsosyal}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white p-1.5 shadow-sm ring-1 ring-outline-variant/40 transition hover:opacity-90"
+          className={iconButtonClass}
           aria-label={`Nsosyal ${site.social.nsosyalHandle}`}
         >
-          <NsosyalIcon className="h-7 w-7" />
+          <NsosyalIcon className={iconClass} />
         </Link>
-      </div>
-
-      <div className="space-y-1 text-sm text-muted">
-        <a href={`mailto:${site.email}`} className="block hover:text-arel">
-          {site.email}
-        </a>
         <Link
           href={site.social.instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="block hover:text-arel"
+          className={iconButtonClass}
+          aria-label={`Instagram ${site.social.instagramHandle}`}
         >
-          Instagram {site.social.instagramHandle}
+          <InstagramIcon className={iconClass} />
         </Link>
-        <Link
-          href={site.social.nsosyal}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block hover:text-arel"
+        <span className={textClass}>{site.social.handle}</span>
+      </li>
+
+      <li className={rowClass}>
+        <a
+          href={`mailto:${site.email}`}
+          className={iconButtonClass}
+          aria-label={`E-posta: ${site.email}`}
         >
-          Nsosyal {site.social.nsosyalHandle}
-        </Link>
-      </div>
+          <EmailIcon className={iconClass} />
+        </a>
+        <a href={`mailto:${site.email}`} className={`${textClass} hover:text-arel`}>
+          {site.email}
+        </a>
+      </li>
+    </ul>
+  );
+}
+
+export function ContactChannels({ variant = "footer" }: ContactChannelsProps) {
+  if (variant === "page") {
+    return (
+      <ChannelRows
+        phone={
+          <a
+            href={`tel:+${site.phoneE164}`}
+            className="cta-lift ml-1 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white"
+          >
+            <PhoneIcon className="h-4 w-4" />
+            {site.phone}
+          </a>
+        }
+      />
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-muted">{site.address.line}</p>
+      <ChannelRows
+        centerOnMobile
+        phone={
+          <a
+            href={`tel:+${site.phoneE164}`}
+            className="ml-1 font-display text-xl font-bold text-navy hover:text-arel"
+          >
+            {site.phone}
+          </a>
+        }
+      />
     </div>
   );
 }

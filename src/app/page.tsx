@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { TrialForm } from "@/components/TrialForm";
 import { comingSoonBranches, getActiveBranches } from "@/data/branches";
 import { faqs } from "@/data/faq";
-import { site } from "@/lib/site";
+import { openGraphDefaults, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
+    ...openGraphDefaults,
     title: `${site.name} | İzmir Gaziemir Spor Kulübü`,
     description: site.description,
     url: site.url,

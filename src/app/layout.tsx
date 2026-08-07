@@ -7,7 +7,7 @@ import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { RevealObserver } from "@/components/RevealObserver";
 import { KineticBackground } from "@/components/KineticBackground";
 import { JsonLd } from "@/components/JsonLd";
-import { site } from "@/lib/site";
+import { ogImage, openGraphDefaults, site } from "@/lib/site";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -33,26 +33,16 @@ export const metadata: Metadata = {
   description: site.description,
   applicationName: site.name,
   openGraph: {
-    type: "website",
-    locale: "tr_TR",
+    ...openGraphDefaults,
     url: site.url,
-    siteName: site.name,
     title: `${site.name} | İzmir Gaziemir Basketbol, Voleybol & Jimnastik`,
     description: site.description,
-    images: [
-      {
-        url: "/brand/logo.png",
-        width: 512,
-        height: 512,
-        alt: `${site.name} — İzmir Gaziemir`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} | İzmir Gaziemir Spor Kulübü`,
     description: site.description,
-    images: ["/brand/logo.png"],
+    images: [ogImage.url],
   },
   alternates: {
     canonical: "/",
@@ -67,11 +57,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
       "max-video-preview": -1,
     },
-  },
-  icons: {
-    icon: [{ url: "/brand/logo.png", type: "image/png" }],
-    apple: [{ url: "/brand/logo.png", type: "image/png" }],
-    shortcut: "/brand/logo.png",
   },
   keywords: [
     "İzmir spor kulübü",

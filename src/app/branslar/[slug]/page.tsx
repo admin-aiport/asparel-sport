@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { TrialForm } from "@/components/TrialForm";
 import { SportIcon } from "@/components/SportIcon";
 import { branches, getBranchBySlug } from "@/data/branches";
-import { site } from "@/lib/site";
+import { openGraphDefaults, site } from "@/lib/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -29,10 +29,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "ücretsiz deneme dersi",
     ],
     openGraph: {
+      ...openGraphDefaults,
       title: branch.seoTitle,
       description: branch.seoDescription,
       url: `${site.url}/branslar/${branch.slug}`,
-      images: branch.image ? [{ url: branch.image, alt: branch.imageAlt }] : undefined,
+      images: branch.image
+        ? [{ url: branch.image, alt: branch.imageAlt }]
+        : openGraphDefaults.images,
     },
     alternates: {
       canonical: `/branslar/${branch.slug}`,

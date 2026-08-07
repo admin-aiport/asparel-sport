@@ -4,7 +4,7 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TrialForm } from "@/components/TrialForm";
 import { faqs } from "@/data/faq";
-import { site } from "@/lib/site";
+import { openGraphDefaults, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "İzmir Gaziemir İletişim & Ücretsiz Deneme Dersi",
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     canonical: "/iletisim",
   },
   openGraph: {
+    ...openGraphDefaults,
     title: "İzmir Gaziemir İletişim & Ücretsiz Deneme Dersi | Asparel",
     description: `Asparel Spor Kulübü — ${site.address.line}. Ücretsiz deneme dersi için hemen yazın.`,
     url: `${site.url}/iletisim`,
@@ -28,28 +29,35 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="px-4 pb-8 pt-28 md:px-10 md:pt-36">
-        <div className="mx-auto max-w-container">
-          <SectionHeading
-            eyebrow="İletişim"
-            title="Hemen başlayalım"
-            description="Ücretsiz deneme, branş seçimi veya salon ziyareti için formu doldurun; WhatsApp veya BiP’ten yazın."
-          />
-          <ContactChannels variant="page" />
-        </div>
-      </section>
-
-      <section className="px-4 pb-16 md:px-10 md:pb-20">
+      <section className="px-4 pb-16 pt-28 md:px-10 md:pb-20 md:pt-36">
         <div className="mx-auto grid max-w-container gap-10 lg:grid-cols-2 lg:gap-14">
-          <TrialForm />
+          <div>
+            <SectionHeading
+              eyebrow="İletişim"
+              title="Hemen başlayalım"
+              description="Ücretsiz deneme, branş seçimi veya salon ziyareti için formu doldurun; WhatsApp veya BiP’ten yazın."
+            />
+            <TrialForm />
+          </div>
           <div className="space-y-6">
+            <ContactChannels variant="page" />
             <div className="overflow-hidden rounded-3xl border border-outline-variant/35 bg-white">
-              <div className="p-6 pb-4">
-                <h2 className="font-display text-xl font-bold text-navy">Şube</h2>
-                <p className="mt-2 text-sm text-muted">{site.address.line}</p>
-                <p className="mt-1 text-sm text-muted">
-                  Basketbol, voleybol ve jimnastik altyapı eğitimi.
-                </p>
+              <div className="flex items-start justify-between gap-4 p-6 pb-4">
+                <div>
+                  <h2 className="font-display text-xl font-bold text-navy">Şube</h2>
+                  <p className="mt-2 text-sm text-muted">{site.address.line}</p>
+                  <p className="mt-1 text-sm text-muted">
+                    Basketbol, voleybol ve jimnastik altyapı eğitimi.
+                  </p>
+                </div>
+                <a
+                  href={site.mapsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 rounded-full border border-outline-variant/50 px-4 py-2 text-sm font-semibold text-navy transition hover:border-arel hover:text-arel"
+                >
+                  Yol Tarifi
+                </a>
               </div>
               <div className="relative h-56 md:h-72">
                 <iframe

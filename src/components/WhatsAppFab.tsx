@@ -3,7 +3,7 @@ import { BipIcon, WhatsAppIcon } from "@/components/SocialIcons";
 import { site } from "@/lib/site";
 
 const fabClass =
-  "flex h-14 w-14 items-center justify-center rounded-full text-white shadow-2xl transition active:scale-90";
+  "flex h-14 w-14 items-center justify-center rounded-full shadow-2xl transition active:scale-90";
 
 export function WhatsAppFab() {
   return (
@@ -21,10 +21,10 @@ export function WhatsAppFab() {
         href={site.whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className={`pulse-whatsapp ${fabClass} bg-whatsapp`}
+        className={`pulse-whatsapp ${fabClass} bg-white p-1.5`}
         aria-label="WhatsApp ile yazın"
       >
-        <WhatsAppIcon className="h-8 w-8" />
+        <WhatsAppIcon className="h-11 w-11" />
       </Link>
     </div>
   );
