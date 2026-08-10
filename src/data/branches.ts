@@ -65,7 +65,7 @@ export const branches: Branch[] = [
     accent: "volleyball",
     accentHex: "#357df1",
     icon: "volleyball",
-    image: "/brand/voleybol-poster.png",
+    image: "/brand/voleybol-poster.jpg",
     imageAlt: "Asparel Voleybol — lisanslı sporcu kariyerine başla",
     highlights: [
       "Smaç ve pas teknikleri",

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" width="1000" height="340" role="img" aria-label="Asparel Spor Kulubu">
+  <style>
+    .wm { font-family: "Arial Black", "Arial Bold", Helvetica, Arial, sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 0; }
+  </style>
+  <text class="wm" x="0" y="150" font-size="160" fill="#6cb4ee">ASP</text>
+  <text class="wm" x="380" y="150" font-size="160" fill="#1a529b">AREL</text>
+  <text class="wm" x="0" y="300" font-size="92" fill="#6cb4ee">SPOR</text>
+  <text class="wm" x="380" y="300" font-size="92" fill="#1a529b">KUL&#x00DC;B&#x00DC;</text>
+</svg>

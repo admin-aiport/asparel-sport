@@ -31,7 +31,7 @@ export const site = {
     "https://www.google.com/maps/search/?api=1&query=Gaziemir+%C4%B0zmir",
   social: {
     instagram: "https://instagram.com/asparelspor",
-    nsosyal: "https://nsosyal.com/@asparelspor",
+    nsosyal: "https://nsosyal.com/asparelspor",
     instagramHandle: "@asparelspor",
     nsosyalHandle: "@asparelspor",
     /** Same handle on both platforms, shown once where the icons identify the platform. */
