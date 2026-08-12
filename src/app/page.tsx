@@ -32,7 +32,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero — brand-led, full-bleed photo */}
-      <section className="relative min-h-[100svh] overflow-hidden">
+      <section className="relative min-h-[88svh] overflow-hidden">
         <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
           <Image
             src="/brand/hero-academy.jpg"
@@ -46,36 +46,21 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/40" />
         </div>
 
-        <div className="mx-auto flex min-h-[100svh] max-w-container flex-col justify-center px-4 pb-16 pt-28 md:px-10 md:pb-24 md:pt-32">
-          <div className="max-w-xl lg:max-w-2xl">
+        <div className="mx-auto flex min-h-[88svh] max-w-container flex-col justify-center px-4 pb-10 pt-28 md:px-10 md:pb-14 md:pt-32">
+          <div className="max-w-5xl lg:max-w-6xl">
             <div className="reveal reveal-delay-1 mb-8 md:mb-10">
-              <BrandWordmark size="hero" href={null} showLogo className="!items-start gap-4 md:gap-6" />
+              <BrandWordmark size="hero" href={null} showLogo={false} className="!items-start" />
             </div>
-            <p className="reveal reveal-delay-2 max-w-md text-lg leading-relaxed text-muted md:text-xl">
+            <p className="reveal reveal-delay-2 max-w-5xl text-lg leading-relaxed text-muted md:max-w-6xl md:text-xl">
               Gaziemir’de lisanslı antrenörlerle basketbol, voleybol ve jimnastik.
               Disiplinli altyapı, güvenli salon, ücretsiz deneme dersi.
             </p>
-            <div className="reveal reveal-delay-3 mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link
-                href="/iletisim#basvuru"
-                className="cta-lift inline-flex items-center justify-center gap-2 rounded-full bg-navy px-8 py-4 text-base font-semibold text-white"
-              >
-                Ücretsiz Deneme Dersi Al
-                <span aria-hidden>→</span>
-              </Link>
-              <Link
-                href="/#branslar"
-                className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-semibold text-arel transition hover:text-navy"
-              >
-                Branşları incele
-              </Link>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Branches */}
-      <section id="branslar" className="reveal px-4 py-20 md:px-10 md:py-28">
+      <section id="branslar" className="reveal px-4 pb-20 pt-10 md:px-10 md:pb-28 md:pt-14">
         <div className="mx-auto max-w-container">
           <SectionHeading
             eyebrow="Eğitimlerimiz"

@@ -24,32 +24,6 @@ export type Branch = {
 
 export const branches: Branch[] = [
   {
-    slug: "basketbol",
-    name: "Basketbol",
-    shortDescription:
-      "Top hakimiyeti, takım oyunu ve disiplinle lisanslı sporcu adımları.",
-    longDescription:
-      "Asparel Basketbol’da çocuklar yaş grubuna göre ilerler: temel koordinasyondan takım taktiklerine. Lisanslı antrenörlerle çeviklik, pas ve maç bilinci birlikte gelişir.",
-    ageRangeLabel: "8-13 Yaş",
-    ageGroups: [
-      { label: "8-10 Yaş Grubu", subtitle: "Koordinasyon ve top hakimiyeti" },
-      { label: "11-12 Yaş Grubu", subtitle: "Takım oyunları ve temel taktik" },
-      { label: "12-13 Yaş Grubu", subtitle: "Performans ve maç hazırlığı" },
-    ],
-    accent: "basketball",
-    accentHex: "#ee9800",
-    icon: "basketball",
-    highlights: [
-      "Yaşa özel teknik ve koordinasyon",
-      "Takım ruhu ve disiplin odaklı antrenman",
-      "Lisanslı sporcu kariyerine sağlam temel",
-    ],
-    progression: ["Teknik Eğitim", "Sağlıklı Gelişim", "Başarılı Kariyer"],
-    seoTitle: "Gaziemir Basketbol Kursu | Asparel Spor Kulübü İzmir",
-    seoDescription:
-      "Gaziemir İzmir’de 8–13 yaş basketbol kursu. Lisanslı antrenörler, yaş grupları ve ücretsiz deneme dersi — Asparel Spor Kulübü.",
-  },
-  {
     slug: "voleybol",
     name: "Voleybol",
     shortDescription:
@@ -107,12 +81,38 @@ export const branches: Branch[] = [
     seoDescription:
       "Gaziemir İzmir’de 2–11 yaş jimnastik. Oyun, koordinasyon, esneklik ve teknik beceriler. Lisanslı antrenörlerle ücretsiz deneme dersi.",
   },
+  {
+    slug: "basketbol",
+    name: "Basketbol",
+    shortDescription:
+      "Top hakimiyeti, takım oyunu ve disiplinle lisanslı sporcu adımları.",
+    longDescription:
+      "Asparel Basketbol’da çocuklar yaş grubuna göre ilerler: temel koordinasyondan takım taktiklerine. Lisanslı antrenörlerle çeviklik, pas ve maç bilinci birlikte gelişir.",
+    ageRangeLabel: "8-13 Yaş",
+    ageGroups: [
+      { label: "8-10 Yaş Grubu", subtitle: "Koordinasyon ve top hakimiyeti" },
+      { label: "11-12 Yaş Grubu", subtitle: "Takım oyunları ve temel taktik" },
+      { label: "12-13 Yaş Grubu", subtitle: "Performans ve maç hazırlığı" },
+    ],
+    accent: "basketball",
+    accentHex: "#ee9800",
+    icon: "basketball",
+    highlights: [
+      "Yaşa özel teknik ve koordinasyon",
+      "Takım ruhu ve disiplin odaklı antrenman",
+      "Lisanslı sporcu kariyerine sağlam temel",
+    ],
+    progression: ["Teknik Eğitim", "Sağlıklı Gelişim", "Başarılı Kariyer"],
+    seoTitle: "Gaziemir Basketbol Kursu | Asparel Spor Kulübü İzmir",
+    seoDescription:
+      "Gaziemir İzmir’de 8–13 yaş basketbol kursu. Lisanslı antrenörler, yaş grupları ve ücretsiz deneme dersi — Asparel Spor Kulübü.",
+  },
 ];
 
 export const comingSoonBranches = [
   {
     name: "Yakında",
-    subtitle: "Tenis & Futbol Akademisi",
+    subtitle: "Yüzme",
   },
 ] as const;
 

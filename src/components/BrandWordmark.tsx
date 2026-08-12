@@ -10,82 +10,35 @@ type Props = {
   className?: string;
 };
 
-/**
- * Matches the crest lockup: two colour blocks
- *   ASP          AREL
- *   SPOR         KULÜBÜ
- * Bottom words stretch to the top word’s width (logo style); a column gap
- * keeps SPOR’s R and KULÜBÜ’s K apart.
- */
+/** Intrinsic size of /brand/wordmark.png */
+const WORDMARK = { w: 1793, h: 576 } as const;
+
 const sizes = {
   sm: {
     logo: "h-9 w-9",
     logoPx: 36,
-    name: "text-[16px] md:text-[17px]",
-    sub: "text-[10px] md:text-[11px]",
-    gap: "gap-x-0.5 gap-y-px",
+    wordmark: "h-8 w-auto md:h-9",
+    wordmarkHeight: 36,
   },
   md: {
     logo: "h-12 w-12 md:h-14 md:w-14",
     logoPx: 56,
-    name: "text-[20px] md:text-[22px]",
-    sub: "text-[12px] md:text-[14px]",
-    gap: "gap-x-0.5 gap-y-0.5",
+    wordmark: "h-9 w-auto md:h-10",
+    wordmarkHeight: 40,
   },
   lg: {
     logo: "h-14 w-14",
     logoPx: 56,
-    name: "text-[28px] md:text-[34px]",
-    sub: "text-[17px] md:text-[21px]",
-    gap: "gap-x-1.5 gap-y-1",
+    wordmark: "h-12 w-auto md:h-14",
+    wordmarkHeight: 56,
   },
   hero: {
     logo: "h-16 w-16 md:h-24 md:w-24",
     logoPx: 96,
-    name: "text-5xl sm:text-6xl md:text-7xl lg:text-8xl",
-    sub: "text-[1.85rem] sm:text-[2.35rem] md:text-[2.85rem] lg:text-[3.4rem]",
-    gap: "gap-x-1.5 gap-y-1 md:gap-x-2 md:gap-y-1.5",
+    wordmark: "h-16 w-auto sm:h-20 md:h-24 lg:h-28",
+    wordmarkHeight: 112,
   },
 } as const;
-
-function StretchWord({
-  text,
-  className,
-}: {
-  text: string;
-  className: string;
-}) {
-  return (
-    <span className={`brand-wordmark__stretch ${className}`}>
-      {Array.from(text).map((ch, i) => (
-        <span key={`${ch}-${i}`}>{ch}</span>
-      ))}
-    </span>
-  );
-}
-
-function WordmarkText({
-  name,
-  sub,
-  gap,
-}: {
-  name: string;
-  sub: string;
-  gap: string;
-}) {
-  return (
-    <span aria-hidden className={`brand-wordmark inline-flex ${gap}`}>
-      <span className="brand-wordmark__col">
-        <span className={`brand-wordmark__name text-asp ${name}`}>ASP</span>
-        <StretchWord text="SPOR" className={`brand-wordmark__stretch--spor text-asp ${sub}`} />
-      </span>
-      <span className="brand-wordmark__col">
-        <span className={`brand-wordmark__name text-arel ${name}`}>AREL</span>
-        <StretchWord text="KULÜBÜ" className={`text-arel ${sub}`} />
-      </span>
-    </span>
-  );
-}
 
 export function BrandWordmark({
   href = "/",
@@ -95,6 +48,9 @@ export function BrandWordmark({
   className = "",
 }: Props) {
   const s = sizes[size];
+  const wordmarkWidth = Math.round(
+    (WORDMARK.w / WORDMARK.h) * s.wordmarkHeight,
+  );
 
   const content = (
     <>
@@ -109,7 +65,14 @@ export function BrandWordmark({
         />
       )}
       {showSubtitle ? (
-        <WordmarkText name={s.name} sub={s.sub} gap={s.gap} />
+        <Image
+          src="/brand/wordmark.png"
+          alt=""
+          width={wordmarkWidth}
+          height={s.wordmarkHeight}
+          className={`${s.wordmark} object-contain object-left`}
+          priority={size === "hero" || size === "md"}
+        />
       ) : (
         <span className="sr-only">{site.name}</span>
       )}

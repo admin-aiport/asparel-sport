@@ -71,61 +71,6 @@ body {
   font-family: var(--font-syne), var(--font-plus-jakarta), system-ui, sans-serif;
 }
 
-/**
- * Crest-style lockup: two colour columns (ASP/SPOR | AREL/KULÜBÜ).
- * Bottom word stretches to the top word’s width — same structure as logo.png.
- */
-.brand-wordmark {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", "Arial Black", sans-serif;
-  font-weight: 400;
-  text-transform: uppercase;
-  font-synthesis: none;
-  letter-spacing: 0.02em;
-  line-height: 0.92;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: geometricPrecision;
-}
-
-.brand-wordmark__col {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  min-width: max-content;
-}
-
-.brand-wordmark__name {
-  display: block;
-  white-space: nowrap;
-}
-
-.brand-wordmark__stretch {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  white-space: nowrap;
-}
-
-/* SPOR is a touch narrower than ASP, left-aligned under ASP’s A. */
-.brand-wordmark__stretch--spor {
-  width: 88%;
-  align-self: start;
-}
-
-.brand-wordmark .text-asp {
-  -webkit-text-stroke: 0.35px color-mix(in srgb, var(--asp) 55%, #0b1d42);
-}
-
-.brand-wordmark .text-arel {
-  -webkit-text-stroke: 0.35px color-mix(in srgb, var(--arel) 70%, #000);
-}
-
-/* Lighten SPOR/KULÜBÜ only — same Impact face & spacing, thinner stroke. */
-.brand-wordmark__stretch.text-asp,
-.brand-wordmark__stretch.text-arel {
-  -webkit-text-stroke: 0.55px #ffffff;
-  paint-order: stroke fill;
-}
-
 /* —— Kinetic (sade, premium ışık) —— */
 .kinetic-stage {
   pointer-events: none;
