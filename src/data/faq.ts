@@ -7,7 +7,7 @@ export const faqs: FaqItem[] = [
   {
     question: "Deneme dersi ücretli mi?",
     answer:
-      "Hayır — ücretsizdir. Form veya WhatsApp ile randevu alıp branşı ve antrenörü yerinde deneyebilirsiniz.",
+      "Hayır — ücretsizdir. Takvimden (Calendly) randevu alıp branşı ve antrenörü yerinde deneyebilirsiniz.",
   },
   {
     question: "Hangi yaş grupları kabul ediliyor?",

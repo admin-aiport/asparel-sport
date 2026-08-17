@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     ...openGraphDefaults,
     title: "İzmir Gaziemir İletişim & Ücretsiz Deneme Dersi | Asparel",
-    description: `Asparel Spor Kulübü — ${site.address.line}. Ücretsiz deneme dersi için hemen yazın.`,
+    description: `Asparel Spor Kulübü — ${site.address.line}. Ücretsiz deneme dersi için takvimden randevu alın.`,
     url: `${site.url}/iletisim`,
   },
 };
@@ -35,7 +35,7 @@ export default function ContactPage() {
             <SectionHeading
               eyebrow="İletişim"
               title="Hemen başlayalım"
-              description="Ücretsiz deneme, branş seçimi veya salon ziyareti için formu doldurun; WhatsApp veya BiP’ten yazın."
+              description="Ücretsiz deneme için takvimden randevu alın; sorularınız için WhatsApp veya BiP’ten yazın."
             />
             <TrialForm />
           </div>
@@ -78,8 +78,9 @@ export default function ContactPage() {
                 KVKK &amp; Gizlilik
               </h2>
               <p>
-                Formdaki ad, telefon ve mesaj yalnızca deneme dersi ve bilgilendirme için
-                kullanılır; ticari amaçla üçüncü taraflarla paylaşılmaz.
+                Randevu için paylaştığınız bilgiler Calendly ve Asparel tarafından yalnızca
+                deneme dersi planlaması ve bilgilendirme amacıyla kullanılır; ticari amaçla
+                üçüncü taraflarla paylaşılmaz.
               </p>
             </div>
           </div>

@@ -29,6 +29,7 @@ export const site = {
     "https://www.google.com/maps?q=Gaziemir+%C4%B0zmir&output=embed",
   mapsLink:
     "https://www.google.com/maps/search/?api=1&query=Gaziemir+%C4%B0zmir",
+  calendlyUrl: "https://calendly.com/antrenor-asparel",
   social: {
     instagram: "https://instagram.com/asparelspor",
     nsosyal: "https://nsosyal.com/asparelspor",
@@ -57,19 +58,3 @@ export const openGraphDefaults = {
   images: [ogImage],
 } satisfies NonNullable<Metadata["openGraph"]>;
 
-export function whatsappTrialMessage(params?: {
-  name?: string;
-  branch?: string;
-  ageGroup?: string;
-  message?: string;
-}) {
-  const lines = [
-    "Merhaba Asparel Spor Kulübü,",
-    "Ücretsiz deneme dersi için başvurmak istiyorum.",
-  ];
-  if (params?.name) lines.push(`Ad Soyad: ${params.name}`);
-  if (params?.branch) lines.push(`Branş: ${params.branch}`);
-  if (params?.ageGroup) lines.push(`Yaş grubu: ${params.ageGroup}`);
-  if (params?.message) lines.push(`Mesaj: ${params.message}`);
-  return `${site.whatsappUrl}?text=${encodeURIComponent(lines.join("\n"))}`;
-}
