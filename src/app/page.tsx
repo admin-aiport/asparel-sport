@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { BrandWordmark } from "@/components/BrandWordmark";
 import { BranchCard, ComingSoonCard } from "@/components/BranchCard";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -32,25 +31,22 @@ export default function HomePage() {
   return (
     <>
       {/* Hero — brand-led, full-bleed photo */}
-      <section className="relative min-h-[88svh] overflow-hidden">
+      <section className="relative min-h-[70svh] overflow-hidden md:min-h-[80svh]">
         <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
           <Image
             src="/brand/hero-academy.jpg"
             alt=""
             fill
             priority
-            className="object-cover object-[72%_center]"
+            className="object-cover object-[center_32%]"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-white via-white/92 to-white/25 md:via-white/88 md:to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/40" />
         </div>
 
-        <div className="mx-auto flex min-h-[88svh] max-w-container flex-col justify-center px-4 pb-10 pt-28 md:px-10 md:pb-14 md:pt-32">
+        <div className="relative mx-auto flex min-h-[70svh] max-w-container flex-col justify-start px-4 pb-10 pt-28 md:min-h-[80svh] md:px-10 md:pb-14 md:pt-32">
           <div className="max-w-5xl lg:max-w-6xl">
-            <div className="reveal reveal-delay-1 mb-8 md:mb-10">
-              <BrandWordmark size="hero" href={null} showLogo={false} className="!items-start" />
-            </div>
             <p className="reveal reveal-delay-2 max-w-5xl text-lg leading-relaxed text-muted md:max-w-6xl md:text-xl">
               Gaziemir’de lisanslı antrenörlerle basketbol, voleybol ve jimnastik.
               Disiplinli altyapı, güvenli salon, ücretsiz deneme dersi.
@@ -59,15 +55,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Branches */}
-      <section id="branslar" className="reveal px-4 pb-20 pt-10 md:px-10 md:pb-28 md:pt-14">
+      {/* Branches — pulled up over lower hero photo */}
+      <section
+        id="branslar"
+        className="reveal relative z-10 -mt-72 px-4 pb-12 pt-0 md:-mt-96 md:px-10 md:pb-16"
+      >
         <div className="mx-auto max-w-container">
           <SectionHeading
             eyebrow="Eğitimlerimiz"
             title="Branşlarımız"
             description="Yaşa özel programlar. İleride yeni branşlar grid’e eklenmeye hazır."
+            className="!mb-6 md:!mb-8"
           />
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
             {branches.map((branch) => (
               <BranchCard key={branch.slug} branch={branch} />
             ))}
@@ -79,7 +79,7 @@ export default function HomePage() {
       </section>
 
       {/* Why Asparel — typography-led */}
-      <section className="reveal border-y border-outline-variant/30 bg-surface-low/80 px-4 py-20 md:px-10 md:py-28">
+      <section className="reveal border-y border-outline-variant/30 bg-surface-low/80 px-4 py-12 md:px-10 md:py-16">
         <div className="mx-auto max-w-container">
           <SectionHeading
             eyebrow="Neden Asparel"
@@ -107,7 +107,7 @@ export default function HomePage() {
       </section>
 
       {/* Progression strip */}
-      <section className="reveal overflow-hidden border-b border-outline-variant/25 py-8" aria-label="Gelişim yolu">
+      <section className="reveal overflow-hidden border-b border-outline-variant/25 py-5" aria-label="Gelişim yolu">
         <div className="progress-marquee font-display text-sm font-bold uppercase tracking-[0.25em] text-arel/80 md:text-base">
           {[0, 1].map((copy) => (
             <span key={copy} className="flex shrink-0 gap-8">
@@ -127,8 +127,8 @@ export default function HomePage() {
       </section>
 
       {/* FAQ + Location */}
-      <section className="reveal px-4 py-20 md:px-10 md:py-28">
-        <div className="mx-auto grid max-w-container gap-14 lg:grid-cols-2 lg:gap-20">
+      <section className="reveal px-4 py-12 md:px-10 md:py-16">
+        <div className="mx-auto grid max-w-container gap-10 lg:grid-cols-2 lg:gap-12">
           <div>
             <SectionHeading
               eyebrow="SSS"
@@ -138,7 +138,7 @@ export default function HomePage() {
             <FaqAccordion items={faqs.slice(0, 4)} />
             <Link
               href="/iletisim"
-              className="mt-8 inline-block text-sm font-semibold text-arel hover:text-navy"
+              className="mt-6 inline-block text-sm font-semibold text-arel hover:text-navy"
             >
               Tüm sorular ve iletişim →
             </Link>
@@ -173,7 +173,7 @@ export default function HomePage() {
       </section>
 
       {/* Trial form */}
-      <section className="reveal px-4 pb-24 md:px-10 md:pb-32">
+      <section className="reveal px-4 pb-14 md:px-10 md:pb-20">
         <div className="mx-auto max-w-2xl">
           <TrialForm />
         </div>
@@ -192,10 +192,10 @@ function WhyItem({
   body: string;
 }) {
   return (
-    <div className="px-0 py-8 md:px-8 md:py-2 first:md:pl-0 last:md:pr-0">
+    <div className="px-0 py-5 md:px-8 md:py-1 first:md:pl-0 last:md:pr-0">
       <p className="font-display text-xs font-bold tracking-[0.2em] text-asp">{index}</p>
-      <h3 className="mt-3 font-display text-xl font-bold text-navy md:text-2xl">{title}</h3>
-      <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">{body}</p>
+      <h3 className="mt-2 font-display text-xl font-bold text-navy md:text-2xl">{title}</h3>
+      <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted">{body}</p>
     </div>
   );
 }
