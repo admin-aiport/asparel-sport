@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { BranchCard, ComingSoonCard } from "@/components/BranchCard";
+import { BranchCard } from "@/components/BranchCard";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TrialForm } from "@/components/TrialForm";
-import { comingSoonBranches, getActiveBranches } from "@/data/branches";
+import { MemberAccess } from "@/components/MemberAccess";
+import { getActiveBranches } from "@/data/branches";
 import { faqs } from "@/data/faq";
 import { openGraphDefaults, site } from "@/lib/site";
 
@@ -45,36 +46,27 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/40" />
         </div>
 
-        <div className="relative mx-auto flex min-h-[70svh] max-w-container flex-col justify-start px-4 pb-10 pt-28 md:min-h-[80svh] md:px-10 md:pb-14 md:pt-32">
+        <div className="relative mx-auto flex min-h-[70svh] max-w-container flex-col justify-start px-4 pb-12 pt-28 md:min-h-[80svh] md:px-10 md:pb-16 md:pt-32">
           <div className="max-w-5xl lg:max-w-6xl">
             <p className="reveal reveal-delay-2 max-w-5xl text-lg leading-relaxed text-muted md:max-w-6xl md:text-xl">
-              Gaziemir’de lisanslı antrenörlerle basketbol, voleybol ve jimnastik.
+              Gaziemir’de lisanslı antrenörlerle basketbol, voleybol, jimnastik ve yüzme.
               Disiplinli altyapı, güvenli salon, ücretsiz deneme dersi.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* Branches — pulled up over lower hero photo */}
-      <section
-        id="branslar"
-        className="reveal relative z-10 -mt-72 px-4 pb-12 pt-0 md:-mt-96 md:px-10 md:pb-16"
-      >
-        <div className="mx-auto max-w-container">
-          <SectionHeading
-            eyebrow="Eğitimlerimiz"
-            title="Branşlarımız"
-            description="Yaşa özel programlar. İleride yeni branşlar grid’e eklenmeye hazır."
-            className="!mb-6 md:!mb-8"
-          />
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-            {branches.map((branch) => (
-              <BranchCard key={branch.slug} branch={branch} />
-            ))}
-            {comingSoonBranches.map((item) => (
-              <ComingSoonCard key={item.name} name={item.name} subtitle={item.subtitle} />
-            ))}
-          </div>
+          <section id="branslar" className="reveal relative z-10 mt-4 md:mt-5">
+            <SectionHeading
+              eyebrow="Eğitimlerimiz"
+              title="Branşlarımız"
+              description="Yaşa özel programlar. Sertifikalı antrenörler ile temel ve teknik eğitimler, lisanslı sporcu takımları."
+              className="!mb-3 md:!mb-4"
+            />
+            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+              {branches.map((branch) => (
+                <BranchCard key={branch.slug} branch={branch} />
+              ))}
+            </div>
+          </section>
         </div>
       </section>
 
@@ -178,6 +170,8 @@ export default function HomePage() {
           <TrialForm />
         </div>
       </section>
+
+      <MemberAccess />
     </>
   );
 }

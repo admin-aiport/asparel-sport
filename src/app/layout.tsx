@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     ...openGraphDefaults,
     url: site.url,
-    title: `${site.name} | İzmir Gaziemir Basketbol, Voleybol & Jimnastik`,
+    title: `${site.name} | İzmir Gaziemir Basketbol, Voleybol, Jimnastik & Yüzme`,
     description: site.description,
   },
   twitter: {
@@ -64,9 +64,11 @@ export const metadata: Metadata = {
     "Gaziemir basketbol kursu",
     "Gaziemir voleybol kursu",
     "Gaziemir jimnastik kursu",
+    "Gaziemir yüzme kursu",
     "İzmir basketbol kursu",
     "İzmir voleybol kursu",
     "İzmir jimnastik kursu",
+    "İzmir yüzme kursu",
     "Asparel Spor Kulübü",
     "çocuk spor akademisi İzmir",
     "ücretsiz deneme dersi",
@@ -81,6 +83,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className={`${plusJakarta.variable} ${syne.variable} h-full`}>
+      <head>
+        <link
+          href="https://assets.calendly.com/assets/external/widget.css"
+          rel="stylesheet"
+        />
+      </head>
       <body className="relative flex min-h-full flex-col font-sans antialiased pb-24 md:pb-0">
         <KineticBackground />
         <JsonLd />

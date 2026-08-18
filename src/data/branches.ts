@@ -10,9 +10,9 @@ export type Branch = {
   longDescription: string;
   ageRangeLabel: string;
   ageGroups: AgeGroup[];
-  accent: "basketball" | "volleyball" | "gymnastics";
+  accent: "basketball" | "volleyball" | "gymnastics" | "swimming";
   accentHex: string;
-  icon: "basketball" | "volleyball" | "gymnastics";
+  icon: "basketball" | "volleyball" | "gymnastics" | "swimming";
   image?: string;
   imageAlt?: string;
   highlights: string[];
@@ -88,15 +88,19 @@ export const branches: Branch[] = [
       "Top hakimiyeti, takım oyunu ve disiplinle lisanslı sporcu adımları.",
     longDescription:
       "Asparel Basketbol’da çocuklar yaş grubuna göre ilerler: temel koordinasyondan takım taktiklerine. Lisanslı antrenörlerle çeviklik, pas ve maç bilinci birlikte gelişir.",
-    ageRangeLabel: "8-13 Yaş",
+    ageRangeLabel: "6-15 Yaş",
     ageGroups: [
-      { label: "8-10 Yaş Grubu", subtitle: "Koordinasyon ve top hakimiyeti" },
-      { label: "11-12 Yaş Grubu", subtitle: "Takım oyunları ve temel taktik" },
-      { label: "12-13 Yaş Grubu", subtitle: "Performans ve maç hazırlığı" },
+      { label: "6-7 Yaş Grubu", subtitle: "Koordinasyon ve top tanışması" },
+      { label: "8-9 Yaş Grubu", subtitle: "Top hakimiyeti ve temel teknik" },
+      { label: "10-11 Yaş Grubu", subtitle: "Takım oyunu ve pas ritmi" },
+      { label: "12-13 Yaş Grubu", subtitle: "Taktik ve maç hazırlığı" },
+      { label: "14-15 Yaş Grubu", subtitle: "Performans ve lisanslı sporcu adımları" },
     ],
     accent: "basketball",
     accentHex: "#ee9800",
     icon: "basketball",
+    image: "/brand/basketbol-poster.png",
+    imageAlt: "Asparel Basketbol — lisanslı sporcu kariyerine başla",
     highlights: [
       "Yaşa özel teknik ve koordinasyon",
       "Takım ruhu ve disiplin odaklı antrenman",
@@ -105,16 +109,39 @@ export const branches: Branch[] = [
     progression: ["Teknik Eğitim", "Sağlıklı Gelişim", "Başarılı Kariyer"],
     seoTitle: "Gaziemir Basketbol Kursu | Asparel Spor Kulübü İzmir",
     seoDescription:
-      "Gaziemir İzmir’de 8–13 yaş basketbol kursu. Lisanslı antrenörler, yaş grupları ve ücretsiz deneme dersi — Asparel Spor Kulübü.",
+      "Gaziemir İzmir’de 6–15 yaş basketbol kursu. Lisanslı antrenörler, yaş grupları ve ücretsiz deneme dersi — Asparel Spor Kulübü.",
+  },
+  {
+    slug: "yuzme",
+    name: "Yüzme",
+    shortDescription:
+      "2’den 70’e her yaşa uygun, sertifikalı antrenörlerle teknik yüzme.",
+    longDescription:
+      "Asparel Yüzme’de 2–70 yaş arası herkes için temel ve teknik yüzme eğitimi verilir. Sertifikalı antrenörlerle suya alışma, teknik gelişim, performans ve yarışma hazırlığı birlikte ilerler.",
+    ageRangeLabel: "2-70 Yaş",
+    ageGroups: [
+      { label: "2-5 Yaş Grubu", subtitle: "Suya alışma ve temel güvenlik" },
+      { label: "6-11 Yaş Grubu", subtitle: "Temel yüzme eğitimi" },
+      { label: "12-17 Yaş Grubu", subtitle: "Teknik ve performans gelişimi" },
+      { label: "18-70 Yaş", subtitle: "Yetişkin teknik yüzme ve kondisyon" },
+    ],
+    accent: "swimming",
+    accentHex: "#00a3d9",
+    icon: "swimming",
+    image: "/brand/yuzme-poster.png",
+    imageAlt: "Asparel Yüzme — sertifikalı antrenörlerle teknik yüzme öğren",
+    highlights: [
+      "Temel yüzme eğitimi",
+      "Teknik ve performans gelişimi",
+      "Sağlıklı ve disiplinli yaşam",
+      "Yarışma hazırlığı",
+    ],
+    progression: ["Teknik Eğitim", "Sağlıklı Gelişim", "Başarılı Kariyer"],
+    seoTitle: "Gaziemir Yüzme Kursu | Asparel Spor Kulübü İzmir",
+    seoDescription:
+      "Gaziemir İzmir’de 2–70 yaş yüzme kursu. Sertifikalı antrenörlerle temel ve teknik yüzme, ücretsiz deneme dersi — Asparel Spor Kulübü.",
   },
 ];
-
-export const comingSoonBranches = [
-  {
-    name: "Yakında",
-    subtitle: "Yüzme",
-  },
-] as const;
 
 export function getBranchBySlug(slug: string): Branch | undefined {
   return branches.find((b) => b.slug === slug);

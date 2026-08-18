@@ -8,7 +8,7 @@ import { openGraphDefaults, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "İzmir Gaziemir İletişim & Ücretsiz Deneme Dersi",
-  description: `Asparel Spor Kulübü İzmir Gaziemir iletişim — ${site.address.line}. ${site.phone}. Basketbol, voleybol ve jimnastik için ücretsiz deneme dersi randevusu alın.`,
+  description: `Asparel Spor Kulübü İzmir Gaziemir iletişim — ${site.address.line}. ${site.phone}. Basketbol, voleybol, jimnastik ve yüzme için ücretsiz deneme dersi randevusu alın.`,
   keywords: [
     "Asparel Spor Kulübü iletişim",
     "Gaziemir deneme dersi",
@@ -47,7 +47,7 @@ export default function ContactPage() {
                   <h2 className="font-display text-xl font-bold text-navy">Şube</h2>
                   <p className="mt-2 text-sm text-muted">{site.address.line}</p>
                   <p className="mt-1 text-sm text-muted">
-                    Basketbol, voleybol ve jimnastik altyapı eğitimi.
+                    Basketbol, voleybol, jimnastik ve yüzme altyapı eğitimi.
                   </p>
                 </div>
                 <a

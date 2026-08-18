@@ -6,12 +6,6 @@ import { useState } from "react";
 import { BrandWordmark } from "@/components/BrandWordmark";
 import { getActiveBranches } from "@/data/branches";
 
-const navLinks = [
-  { href: "/", label: "Anasayfa" },
-  { href: "/#branslar", label: "Branşlar" },
-  { href: "/iletisim", label: "İletişim" },
-];
-
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -36,23 +30,7 @@ export function Header() {
         </div>
 
         <nav className="hidden items-center gap-9 md:flex" aria-label="Ana menü">
-          {navLinks.map((link) => {
-            const active =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname === link.href || pathname.startsWith(link.href);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-[13px] font-semibold tracking-wide transition-colors hover:text-arel ${
-                  active ? "text-arel" : "text-muted"
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          <NavLink href="/" label="Anasayfa" pathname={pathname} />
           <div className="group relative">
             <span className="cursor-default text-[13px] font-semibold tracking-wide text-muted transition-colors group-hover:text-arel">
               Branşlar
@@ -69,29 +47,41 @@ export function Header() {
               ))}
             </div>
           </div>
+          <NavLink href="/iletisim" label="İletişim" pathname={pathname} />
         </nav>
 
-        <Link
-          href="/iletisim#basvuru"
-          className="cta-lift rounded-full bg-navy px-4 py-2.5 text-sm font-semibold text-white md:px-5"
-        >
-          Ücretsiz Deneme
-        </Link>
+        <div className="flex items-center gap-2 md:gap-3">
+          <Link
+            href="/iletisim#basvuru"
+            className="cta-lift rounded-full bg-navy px-4 py-2.5 text-sm font-semibold text-white md:px-5"
+          >
+            Ücretsiz Deneme
+          </Link>
+          <Link
+            href="/#giris-sporcu"
+            className="hidden rounded-full border border-outline-variant/50 px-4 py-2.5 text-sm font-semibold text-navy transition hover:border-arel hover:text-arel md:inline-flex"
+          >
+            Sporcu
+          </Link>
+          <Link
+            href="/#giris-antrenor"
+            className="hidden rounded-full border border-outline-variant/50 px-4 py-2.5 text-sm font-semibold text-navy transition hover:border-arel hover:text-arel md:inline-flex"
+          >
+            Antrenör
+          </Link>
+        </div>
       </div>
 
       {open && (
         <div className="border-t border-outline-variant/25 bg-white px-4 py-4 md:hidden">
           <nav className="flex flex-col gap-1" aria-label="Mobil menü">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-xl px-3 py-3 text-base font-semibold text-navy hover:bg-surface-low"
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            <Link
+              href="/"
+              className="rounded-xl px-3 py-3 text-base font-semibold text-navy hover:bg-surface-low"
+              onClick={() => setOpen(false)}
+            >
+              Anasayfa
+            </Link>
             {branches.map((b) => (
               <Link
                 key={b.slug}
@@ -102,10 +92,54 @@ export function Header() {
                 {b.name}
               </Link>
             ))}
+            <Link
+              href="/iletisim"
+              className="rounded-xl px-3 py-3 text-base font-semibold text-navy hover:bg-surface-low"
+              onClick={() => setOpen(false)}
+            >
+              İletişim
+            </Link>
+            <Link
+              href="/#giris-sporcu"
+              className="rounded-xl px-3 py-3 text-base font-semibold text-navy hover:bg-surface-low"
+              onClick={() => setOpen(false)}
+            >
+              Sporcu
+            </Link>
+            <Link
+              href="/#giris-antrenor"
+              className="rounded-xl px-3 py-3 text-base font-semibold text-navy hover:bg-surface-low"
+              onClick={() => setOpen(false)}
+            >
+              Antrenör
+            </Link>
           </nav>
         </div>
       )}
     </header>
+  );
+}
+
+function NavLink({
+  href,
+  label,
+  pathname,
+}: {
+  href: string;
+  label: string;
+  pathname: string;
+}) {
+  const active = href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href);
+
+  return (
+    <Link
+      href={href}
+      className={`text-[13px] font-semibold tracking-wide transition-colors hover:text-arel ${
+        active ? "text-arel" : "text-muted"
+      }`}
+    >
+      {label}
+    </Link>
   );
 }
 

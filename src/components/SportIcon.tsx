@@ -1,5 +1,5 @@
 type Props = {
-  name: "basketball" | "volleyball" | "gymnastics";
+  name: "basketball" | "volleyball" | "gymnastics" | "swimming";
   className?: string;
 };
 
@@ -24,6 +24,25 @@ export function SportIcon({ name, className = "h-6 w-6" }: Props) {
           d="M5 8c3 2 8 3 14 1M4 14c4-1 10 0 15 3M12 3c1 4 0 10-3 15"
           stroke="currentColor"
           strokeWidth="1.8"
+        />
+      </svg>
+    );
+  }
+  if (name === "swimming") {
+    return (
+      <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
+        <path
+          d="M3 16.5c1.4-1 2.8-1 4.2 0s2.8 1 4.2 0 2.8-1 4.2 0 2.8 1 4.2 0M3 20c1.4-1 2.8-1 4.2 0s2.8 1 4.2 0 2.8-1 4.2 0 2.8 1 4.2 0"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+        />
+        <circle cx="16.5" cy="6.5" r="1.6" stroke="currentColor" strokeWidth="1.8" />
+        <path
+          d="M14.8 9.2c-1.6 1-3.2 2.2-3.8 4.2M11.2 10.4c1.4.3 2.6 0 4.2-.6"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
         />
       </svg>
     );

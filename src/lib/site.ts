@@ -5,7 +5,7 @@ export const site = {
   shortName: "ASPAREL",
   tagline: "Güç, disiplin ve takım ruhu",
   description:
-    "İzmir Gaziemir’de basketbol, voleybol ve jimnastik altyapısı. Lisanslı antrenörler, yaşa özel programlar ve ücretsiz deneme dersi.",
+    "İzmir Gaziemir’de basketbol, voleybol, jimnastik ve yüzme altyapısı. Lisanslı antrenörler, yaşa özel programlar ve ücretsiz deneme dersi.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://asparel.tr",
   phone: "0535 763 69 17",
   phoneE164: "905357636917",
@@ -30,6 +30,8 @@ export const site = {
   mapsLink:
     "https://www.google.com/maps/search/?api=1&query=Gaziemir+%C4%B0zmir",
   calendlyUrl: "https://calendly.com/antrenor-asparel",
+  calendlyAthleteUrl: "https://calendly.com/antrenor-asparel/sporcu",
+  calendlyCoachUrl: "https://calendly.com/antrenor-asparel/antrenor",
   social: {
     instagram: "https://instagram.com/asparelspor",
     nsosyal: "https://nsosyal.com/asparelspor",
