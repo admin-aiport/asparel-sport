@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { CalendlyEmbed, buildCalendlyUrl } from "@/components/CalendlyEmbed";
 import { site } from "@/lib/site";
 
@@ -11,10 +12,17 @@ type Props = {
 const trialCalendlyUrl = buildCalendlyUrl(site.calendlyUrl);
 
 export function TrialForm(_props: Props) {
+  useEffect(() => {
+    if (window.location.hash !== "#basvuru") return;
+    requestAnimationFrame(() => {
+      document.getElementById("basvuru")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, []);
+
   return (
     <div
       id="basvuru"
-      className="rounded-3xl border border-outline-variant/35 bg-white p-6 shadow-[0_20px_50px_rgba(11,29,66,0.06)] md:p-9"
+      className="scroll-mt-28 rounded-3xl border border-outline-variant/35 bg-white p-4 shadow-[0_20px_50px_rgba(11,29,66,0.06)] sm:p-6 md:p-9"
     >
       <div>
         <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-asp">Rezervasyon</p>

@@ -51,24 +51,27 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2 md:gap-3">
-          <Link
-            href="/iletisim#basvuru"
+          <PathHashLink
+            pathname="/iletisim"
+            hash="#basvuru"
             className="cta-lift rounded-full bg-navy px-4 py-2.5 text-sm font-semibold text-white md:px-5"
           >
             Ücretsiz Deneme
-          </Link>
-          <Link
-            href="/#giris-sporcu"
+          </PathHashLink>
+          <PathHashLink
+            pathname="/"
+            hash="#giris-sporcu"
             className="hidden rounded-full border border-outline-variant/50 px-4 py-2.5 text-sm font-semibold text-navy transition hover:border-arel hover:text-arel md:inline-flex"
           >
             Sporcu
-          </Link>
-          <Link
-            href="/#giris-antrenor"
+          </PathHashLink>
+          <PathHashLink
+            pathname="/"
+            hash="#giris-antrenor"
             className="hidden rounded-full border border-outline-variant/50 px-4 py-2.5 text-sm font-semibold text-navy transition hover:border-arel hover:text-arel md:inline-flex"
           >
             Antrenör
-          </Link>
+          </PathHashLink>
         </div>
       </div>
 
@@ -99,24 +102,64 @@ export function Header() {
             >
               İletişim
             </Link>
-            <Link
-              href="/#giris-sporcu"
+            <PathHashLink
+              pathname="/"
+              hash="#giris-sporcu"
               className="rounded-xl px-3 py-3 text-base font-semibold text-navy hover:bg-surface-low"
-              onClick={() => setOpen(false)}
+              onNavigate={() => setOpen(false)}
             >
               Sporcu
-            </Link>
-            <Link
-              href="/#giris-antrenor"
+            </PathHashLink>
+            <PathHashLink
+              pathname="/"
+              hash="#giris-antrenor"
               className="rounded-xl px-3 py-3 text-base font-semibold text-navy hover:bg-surface-low"
-              onClick={() => setOpen(false)}
+              onNavigate={() => setOpen(false)}
             >
               Antrenör
-            </Link>
+            </PathHashLink>
           </nav>
         </div>
       )}
     </header>
+  );
+}
+
+function PathHashLink({
+  pathname: targetPath,
+  hash,
+  className,
+  children,
+  onNavigate,
+}: {
+  pathname: "/" | "/iletisim";
+  hash: "#giris-sporcu" | "#giris-antrenor" | "#basvuru";
+  className?: string;
+  children: React.ReactNode;
+  onNavigate?: () => void;
+}) {
+  const pathname = usePathname();
+  const href = `${targetPath}${hash}`;
+
+  return (
+    <Link
+      href={href}
+      className={className}
+      onClick={(event) => {
+        onNavigate?.();
+        if (pathname !== targetPath) return;
+        event.preventDefault();
+        if (window.location.hash !== hash) {
+          window.location.hash = hash;
+        }
+        document.getElementById(hash.slice(1))?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }}
+    >
+      {children}
+    </Link>
   );
 }
 

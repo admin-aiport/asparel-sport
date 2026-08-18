@@ -84,6 +84,8 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${plusJakarta.variable} ${syne.variable} h-full`}>
       <head>
+        <link rel="preconnect" href="https://assets.calendly.com" />
+        <link rel="preconnect" href="https://calendly.com" />
         <link
           href="https://assets.calendly.com/assets/external/widget.css"
           rel="stylesheet"

@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import { CalendlyEmbed, buildCalendlyUrl, openCalendlyPopup } from "@/components/CalendlyEmbed";
 import { site } from "@/lib/site";
 
@@ -36,6 +37,7 @@ function hashToRole(hash: string): MemberRole {
 }
 
 export function MemberAccess() {
+  const pathname = usePathname();
   const [role, setRole] = useState<MemberRole>("sporcu");
   const [email, setEmail] = useState("");
   const [submittedEmail, setSubmittedEmail] = useState("");
@@ -47,8 +49,16 @@ export function MemberAccess() {
 
     syncRoleFromHash();
     window.addEventListener("hashchange", syncRoleFromHash);
+
+    const { hash } = window.location;
+    if (pathname === "/" && (hash === "#giris-sporcu" || hash === "#giris-antrenor")) {
+      requestAnimationFrame(() => {
+        document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+
     return () => window.removeEventListener("hashchange", syncRoleFromHash);
-  }, []);
+  }, [pathname]);
 
   const config = roleConfig[role];
   const calendlyUrl = useMemo(
@@ -104,7 +114,7 @@ export function MemberAccess() {
                 aria-selected={active}
                 aria-controls={`panel-${tabRole}`}
                 onClick={() => setRole(tabRole)}
-                className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+                className={`scroll-mt-28 rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                   active
                     ? "bg-navy text-white shadow-sm"
                     : "border border-outline-variant/50 bg-white text-navy hover:border-arel hover:text-arel"
@@ -120,7 +130,7 @@ export function MemberAccess() {
           id={`panel-${role}`}
           role="tabpanel"
           aria-labelledby={role === "sporcu" ? "giris-sporcu" : "giris-antrenor"}
-          className="mt-8 rounded-3xl border border-outline-variant/35 bg-white p-6 shadow-[0_20px_50px_rgba(11,29,66,0.06)] md:p-9"
+          className="mt-8 rounded-3xl border border-outline-variant/35 bg-white p-4 shadow-[0_20px_50px_rgba(11,29,66,0.06)] sm:p-6 md:p-9"
         >
           <div>
             <h3 className="font-display text-2xl font-bold text-navy md:text-3xl">{config.title}</h3>
@@ -156,7 +166,6 @@ export function MemberAccess() {
             key={`${role}-${submittedEmail}`}
             url={calendlyUrl}
             className="mt-6"
-            heightClassName="h-[700px]"
             fallbackHref={config.calendlyBaseUrl}
           />
 

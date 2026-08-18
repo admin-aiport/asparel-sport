@@ -321,17 +321,24 @@ body {
   animation: marquee 28s linear infinite;
 }
 
-/* Calendly inline widget — iframe fills container */
+/* Calendly inline widget — iframe fills the 700px box (width + height).
+   min-width: 0 avoids clipping on narrow screens (body overflow-x: hidden).
+   !important beats Calendly's inline iframe pixel sizes so the frame cannot shrink. */
 .calendly-inline-widget {
   position: relative;
-  min-width: 320px;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 700px;
+  overflow: hidden;
 }
 
 .calendly-inline-widget iframe {
+  position: absolute;
+  inset: 0;
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   border: 0;
 }
 

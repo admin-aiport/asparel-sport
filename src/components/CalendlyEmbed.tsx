@@ -16,6 +16,7 @@ declare global {
 }
 
 const SCRIPT_SRC = "https://assets.calendly.com/assets/external/widget.js";
+const WIDGET_HEIGHT_PX = 700;
 
 export function buildCalendlyUrl(baseUrl: string, email?: string) {
   const url = new URL(baseUrl);
@@ -27,29 +28,51 @@ export function buildCalendlyUrl(baseUrl: string, email?: string) {
   return url.toString();
 }
 
+let scriptPromise: Promise<void> | null = null;
+
 export function loadCalendlyScript(): Promise<void> {
   if (typeof window === "undefined") return Promise.resolve();
   if (window.Calendly) return Promise.resolve();
+  if (scriptPromise) return scriptPromise;
 
-  const existing = document.querySelector<HTMLScriptElement>(`script[src="${SCRIPT_SRC}"]`);
-  if (existing) {
-    return new Promise((resolve) => {
+  scriptPromise = new Promise((resolve, reject) => {
+    const succeed = () => {
       if (window.Calendly) {
         resolve();
         return;
       }
-      existing.addEventListener("load", () => resolve(), { once: true });
-    });
-  }
+      scriptPromise = null;
+      reject(new Error("Calendly script loaded without Calendly global"));
+    };
 
-  return new Promise((resolve, reject) => {
+    const fail = () => {
+      scriptPromise = null;
+      reject(new Error("Calendly script failed to load"));
+    };
+
+    const existing = document.querySelector<HTMLScriptElement>(`script[src="${SCRIPT_SRC}"]`);
+    if (existing) {
+      if (window.Calendly) {
+        resolve();
+        return;
+      }
+      existing.addEventListener("load", succeed, { once: true });
+      existing.addEventListener("error", fail, { once: true });
+      queueMicrotask(() => {
+        if (window.Calendly) succeed();
+      });
+      return;
+    }
+
     const script = document.createElement("script");
     script.src = SCRIPT_SRC;
     script.async = true;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error("Calendly script failed to load"));
+    script.onload = succeed;
+    script.onerror = fail;
     document.body.appendChild(script);
   });
+
+  return scriptPromise;
 }
 
 export async function openCalendlyPopup(url: string) {
@@ -68,15 +91,23 @@ export async function openCalendlyPopup(url: string) {
 type CalendlyEmbedProps = {
   url: string;
   className?: string;
-  heightClassName?: string;
   fallbackHref?: string;
   fallbackLabel?: string;
 };
 
+function applyWidgetBox(el: HTMLElement) {
+  // Inline height is required: Calendly concatenates parent.style and produces
+  // `position: relative;null` when the attribute is missing, so the iframe
+  // never gets a used height. Do not pass data-url (avoids auto-init + JS init).
+  el.style.position = "relative";
+  el.style.width = "100%";
+  el.style.minWidth = "0";
+  el.style.height = `${WIDGET_HEIGHT_PX}px`;
+}
+
 export function CalendlyEmbed({
   url,
   className = "",
-  heightClassName = "h-[700px]",
   fallbackHref,
   fallbackLabel = "Calendly’de açın",
 }: CalendlyEmbedProps) {
@@ -87,15 +118,17 @@ export function CalendlyEmbed({
     if (!el) return;
 
     let cancelled = false;
+    applyWidgetBox(el);
 
     loadCalendlyScript()
       .then(() => {
         if (cancelled || !containerRef.current || !window.Calendly) return;
-        containerRef.current.innerHTML = "";
+        const parent = containerRef.current;
+        parent.replaceChildren();
+        applyWidgetBox(parent);
         window.Calendly.initInlineWidget({
           url,
-          parentElement: containerRef.current,
-          resize: true,
+          parentElement: parent,
         });
       })
       .catch(() => {
@@ -104,6 +137,7 @@ export function CalendlyEmbed({
 
     return () => {
       cancelled = true;
+      el.replaceChildren();
     };
   }, [url]);
 
@@ -111,8 +145,13 @@ export function CalendlyEmbed({
     <>
       <div
         ref={containerRef}
-        className={`calendly-inline-widget w-full rounded-2xl ${heightClassName} ${className}`}
-        data-url={url}
+        className={`calendly-inline-widget w-full max-w-full overflow-hidden rounded-2xl ${className}`}
+        style={{
+          position: "relative",
+          width: "100%",
+          minWidth: 0,
+          height: WIDGET_HEIGHT_PX,
+        }}
       />
       {fallbackHref && (
         <p className="mt-4 text-center text-sm text-muted">
