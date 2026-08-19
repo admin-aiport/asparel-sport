@@ -59,6 +59,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -69,6 +70,20 @@ body {
 
 .font-display {
   font-family: var(--font-syne), var(--font-plus-jakarta), system-ui, sans-serif;
+}
+
+/* Shared content column: same start/end as header on every breakpoint. */
+.page-shell {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--spacing-container);
+  padding-inline: 1rem;
+}
+
+@media (min-width: 768px) {
+  .page-shell {
+    padding-inline: 2.5rem;
+  }
 }
 
 /* —— Kinetic (sade, premium ışık) —— */
@@ -257,6 +272,12 @@ body {
   transform: translateY(0);
 }
 
+/* Transform on an ancestor makes Calendly's iframe paint with zero used height. */
+.reveal:has(.calendly-inline-widget),
+.reveal:has(.calendly-inline-widget).is-visible {
+  transform: none;
+}
+
 .reveal-delay-1 {
   transition-delay: 0.08s;
 }
@@ -321,16 +342,45 @@ body {
   animation: marquee 28s linear infinite;
 }
 
-/* Calendly inline widget — iframe fills the 700px box (width + height).
-   min-width: 0 avoids clipping on narrow screens (body overflow-x: hidden).
-   !important beats Calendly's inline iframe pixel sizes so the frame cannot shrink. */
+/* Calendly’s widget.css sets min-width: 320px. Contain that inside a shell so
+   the page never gets a horizontal scrollbar; the iframe can scroll internally. */
+.calendly-embed-shell {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .calendly-inline-widget {
   position: relative;
   width: 100%;
   max-width: 100%;
-  min-width: 0;
+  min-width: 0 !important;
   height: 700px;
   overflow: hidden;
+}
+
+.field-input {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in oklab, var(--outline-variant) 50%, transparent);
+  background: white;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: var(--navy);
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .field-input {
+    font-size: 0.875rem;
+  }
+}
+
+.field-input:focus {
+  border-color: var(--arel);
 }
 
 .calendly-inline-widget iframe {
@@ -338,6 +388,8 @@ body {
   inset: 0;
   display: block;
   width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
   height: 100% !important;
   border: 0;
 }

@@ -21,11 +21,11 @@ export function FaqAccordion({ items }: Props) {
           >
             <button
               type="button"
-              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+              className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left min-h-12 sm:px-5"
               aria-expanded={open}
               onClick={() => setOpenIndex(open ? null : index)}
             >
-              <span className="font-semibold text-navy">{item.question}</span>
+              <span className="min-w-0 break-words font-semibold text-navy">{item.question}</span>
               <span
                 className={`shrink-0 font-display text-xl text-asp transition-transform ${open ? "rotate-45" : ""}`}
                 aria-hidden

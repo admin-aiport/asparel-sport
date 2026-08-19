@@ -70,7 +70,7 @@ export function BrandWordmark({
           alt=""
           width={wordmarkWidth}
           height={s.wordmarkHeight}
-          className={`${s.wordmark} object-contain object-left`}
+          className={`${s.wordmark} max-w-full object-contain object-left`}
           priority={size === "hero" || size === "md"}
         />
       ) : (
@@ -83,7 +83,7 @@ export function BrandWordmark({
     return (
       <Link
         href={href}
-        className={`inline-flex items-center gap-2.5 ${className}`}
+        className={`inline-flex min-w-0 items-center gap-2 sm:gap-2.5 ${className}`}
         aria-label={site.name}
       >
         {content}
@@ -92,7 +92,7 @@ export function BrandWordmark({
   }
 
   return (
-    <div className={`inline-flex items-center gap-2.5 ${className}`} aria-label={site.name}>
+    <div className={`inline-flex min-w-0 items-center gap-2 sm:gap-2.5 ${className}`} aria-label={site.name}>
       {content}
     </div>
   );

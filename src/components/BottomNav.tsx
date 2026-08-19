@@ -14,10 +14,10 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 z-50 w-full rounded-t-3xl border-t border-outline-variant/40 bg-white/95 shadow-[0_-8px_30px_rgba(11,29,66,0.06)] backdrop-blur-xl md:hidden"
+      className="fixed bottom-0 z-50 w-full rounded-t-3xl border-t border-outline-variant/40 bg-white/95 pb-[env(safe-area-inset-bottom,0px)] shadow-[0_-8px_30px_rgba(11,29,66,0.06)] backdrop-blur-xl md:hidden"
       aria-label="Alt navigasyon"
     >
-      <div className="flex h-20 items-center justify-around px-4 pb-2">
+      <div className="flex h-20 items-center justify-around px-2 pb-1">
         {items.map((item) => {
           const active =
             item.href === "/"
@@ -30,7 +30,7 @@ export function BottomNav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center justify-center transition ${
+              className={`flex min-h-12 min-w-[4.5rem] flex-col items-center justify-center px-2 py-1 transition ${
                 active ? "scale-110 text-secondary-container" : "text-outline hover:text-navy"
               }`}
             >

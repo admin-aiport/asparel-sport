@@ -24,7 +24,7 @@ export function SectionHeading({
       {eyebrow && (
         <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-asp">{eyebrow}</p>
       )}
-      <h2 className="font-display text-3xl font-bold tracking-tight text-navy md:text-5xl">
+      <h2 className="font-display text-2xl font-bold tracking-tight text-navy sm:text-3xl md:text-5xl">
         {title}
       </h2>
       {description && (

@@ -16,7 +16,7 @@ type ContactChannelsProps = {
 
 /** Every brand logo PNG is full-bleed square art, so one shared size keeps them uniform. */
 const iconButtonClass =
-  "inline-flex h-10 w-10 items-center justify-center rounded-full bg-white p-1.5 shadow-sm ring-1 ring-outline-variant/40 transition hover:opacity-90";
+  "inline-flex h-11 w-11 items-center justify-center rounded-full bg-white p-1.5 shadow-sm ring-1 ring-outline-variant/40 transition hover:opacity-90";
 const iconClass = "h-7 w-7";
 const textClass = "ml-1 text-sm text-muted";
 
@@ -85,7 +85,7 @@ function ChannelRows({
         >
           <EmailIcon className={iconClass} />
         </a>
-        <a href={`mailto:${site.email}`} className={`${textClass} hover:text-arel`}>
+        <a href={`mailto:${site.email}`} className={`${textClass} break-all hover:text-arel`}>
           {site.email}
         </a>
       </li>
@@ -100,7 +100,7 @@ export function ContactChannels({ variant = "footer" }: ContactChannelsProps) {
         phone={
           <a
             href={`tel:+${site.phoneE164}`}
-            className="cta-lift ml-1 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white"
+            className="cta-lift ml-0 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white sm:ml-1 sm:w-auto"
           >
             <PhoneIcon className="h-4 w-4" />
             {site.phone}

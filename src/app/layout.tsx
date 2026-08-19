@@ -1,5 +1,5 @@
 import { Plus_Jakarta_Sans, Syne } from "next/font/google";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BottomNav } from "@/components/BottomNav";
@@ -23,6 +23,12 @@ const syne = Syne({
   weight: ["500", "600", "700", "800"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -91,7 +97,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="relative flex min-h-full flex-col font-sans antialiased pb-24 md:pb-0">
+      <body className="relative flex min-h-full flex-col font-sans antialiased pb-[calc(6rem+env(safe-area-inset-bottom,0px))] md:pb-0">
         <KineticBackground />
         <JsonLd />
         <RevealObserver />

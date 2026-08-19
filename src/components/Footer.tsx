@@ -9,8 +9,8 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-20 border-t border-outline-variant/35 bg-white px-4 pb-10 pt-14 md:px-10">
-      <div className="mx-auto grid max-w-container gap-12 md:grid-cols-3">
+    <footer className="mt-20 border-t border-outline-variant/35 bg-white pb-10 pt-14">
+      <div className="page-shell grid gap-12 md:grid-cols-3">
         <div className="flex flex-col items-center text-center md:items-start md:text-left">
           <BrandWordmark size="lg" className="mb-4" />
           <p className="max-w-xs text-sm leading-relaxed text-muted">{site.description}</p>
@@ -25,14 +25,14 @@ export function Footer() {
               <li key={b.slug}>
                 <Link
                   href={`/branslar/${b.slug}`}
-                  className="text-sm text-muted transition hover:text-arel"
+                  className="inline-flex min-h-11 items-center text-sm text-muted transition hover:text-arel"
                 >
                   {b.name}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/iletisim" className="text-sm text-muted transition hover:text-arel">
+              <Link href="/iletisim" className="inline-flex min-h-11 items-center text-sm text-muted transition hover:text-arel">
                 İletişim
               </Link>
             </li>
@@ -47,12 +47,12 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="mx-auto mt-12 flex max-w-container flex-col items-center gap-3 border-t border-outline-variant/25 pt-7 text-center">
+      <div className="page-shell mt-12 flex flex-col items-center gap-3 border-t border-outline-variant/25 pt-7 text-center">
         <div className="flex flex-wrap justify-center gap-6">
-          <Link href="/iletisim#kvkk" className="text-sm text-muted hover:text-arel">
+          <Link href="/iletisim#kvkk" className="inline-flex min-h-11 items-center text-sm text-muted hover:text-arel">
             KVKK
           </Link>
-          <Link href="/iletisim#kvkk" className="text-sm text-muted hover:text-arel">
+          <Link href="/iletisim#kvkk" className="inline-flex min-h-11 items-center text-sm text-muted hover:text-arel">
             Kullanım Koşulları
           </Link>
         </div>

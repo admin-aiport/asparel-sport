@@ -22,7 +22,7 @@ export function TrialForm(_props: Props) {
   return (
     <div
       id="basvuru"
-      className="scroll-mt-28 rounded-3xl border border-outline-variant/35 bg-white p-4 shadow-[0_20px_50px_rgba(11,29,66,0.06)] sm:p-6 md:p-9"
+      className="scroll-mt-28 min-w-0 overflow-hidden rounded-3xl border border-outline-variant/35 bg-white p-3 shadow-[0_20px_50px_rgba(11,29,66,0.06)] sm:p-6 md:p-9"
     >
       <div>
         <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-asp">Rezervasyon</p>

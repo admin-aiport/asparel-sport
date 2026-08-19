@@ -72,10 +72,10 @@ export default async function BranchPage({ params }: Props) {
           <div className="absolute inset-0 bg-gradient-to-b from-white/75 via-white/88 to-white" />
         </div>
 
-        <div className="mx-auto max-w-container px-4 pb-16 pt-28 md:px-10 md:pb-24 md:pt-36">
+        <div className="page-shell pb-16 pt-28 md:pb-24 md:pt-36">
           <Link
             href="/#branslar"
-            className="mb-8 inline-block text-sm font-semibold text-muted transition hover:text-arel"
+            className="mb-8 inline-flex min-h-11 items-center text-sm font-semibold text-muted transition hover:text-arel"
           >
             ← Tüm branşlar
           </Link>
@@ -87,7 +87,7 @@ export default async function BranchPage({ params }: Props) {
               >
                 {branch.ageRangeLabel}
               </p>
-              <h1 className="font-display text-5xl font-bold tracking-tight text-navy md:text-7xl">
+              <h1 className="font-display text-4xl font-bold tracking-tight text-navy sm:text-5xl md:text-7xl">
                 {branch.name}
               </h1>
               <p className="mt-5 text-base leading-relaxed text-muted md:text-lg">
@@ -104,8 +104,8 @@ export default async function BranchPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="reveal px-4 pb-16 md:px-10 md:pb-20">
-        <div className="mx-auto max-w-container">
+      <section className="reveal pb-16 md:pb-20">
+        <div className="page-shell">
           <h2 className="mb-8 font-display text-2xl font-bold text-navy md:text-3xl">
             Yaş grupları
           </h2>
@@ -130,8 +130,8 @@ export default async function BranchPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="reveal border-y border-outline-variant/30 bg-surface-low/70 px-4 py-16 md:px-10 md:py-20">
-        <div className="mx-auto max-w-container">
+      <section className="reveal border-y border-outline-variant/30 bg-surface-low/70 py-16 md:py-20">
+        <div className="page-shell">
           <h2 className="mb-8 font-display text-2xl font-bold text-navy md:text-3xl">
             Program vurguları
           </h2>
@@ -148,28 +148,30 @@ export default async function BranchPage({ params }: Props) {
               </li>
             ))}
           </ul>
-          <p className="mt-10 text-center font-display text-xs font-bold uppercase tracking-[0.22em] text-arel/80 md:text-sm">
+          <p className="mt-10 px-1 text-center font-display text-xs font-bold uppercase leading-relaxed tracking-[0.18em] text-arel/80 md:text-sm md:tracking-[0.22em]">
             {branch.progression.join(" → ")}
           </p>
         </div>
       </section>
 
       {branch.image && (
-        <section className="reveal px-4 py-14 md:px-10">
-          <div className="relative mx-auto aspect-[3/4] max-w-md overflow-hidden rounded-3xl border border-outline-variant/30 shadow-xl md:aspect-[4/5]">
-            <Image
-              src={branch.image}
-              alt={branch.imageAlt ?? branch.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 448px"
-            />
+        <section className="reveal py-14">
+          <div className="page-shell">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl border border-outline-variant/30 shadow-xl md:aspect-[21/9]">
+              <Image
+                src={branch.image}
+                alt={branch.imageAlt ?? branch.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 80rem"
+              />
+            </div>
           </div>
         </section>
       )}
 
-      <section className="reveal px-4 pb-24 md:px-10 md:pb-32">
-        <div className="mx-auto max-w-2xl">
+      <section className="reveal pb-24 md:pb-32">
+        <div className="page-shell min-w-0">
           <TrialForm defaultBranch={branch.slug} />
         </div>
       </section>

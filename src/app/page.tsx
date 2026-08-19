@@ -46,13 +46,11 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/40" />
         </div>
 
-        <div className="relative mx-auto flex min-h-[70svh] max-w-container flex-col justify-start px-4 pb-12 pt-28 md:min-h-[80svh] md:px-10 md:pb-16 md:pt-32">
-          <div className="max-w-5xl lg:max-w-6xl">
-            <p className="reveal reveal-delay-2 max-w-5xl text-lg leading-relaxed text-muted md:max-w-6xl md:text-xl">
-              Gaziemir’de lisanslı antrenörlerle basketbol, voleybol, jimnastik ve yüzme.
-              Disiplinli altyapı, güvenli salon, ücretsiz deneme dersi.
-            </p>
-          </div>
+        <div className="page-shell relative flex min-h-[70svh] flex-col justify-start pb-12 pt-28 md:min-h-[80svh] md:pb-16 md:pt-32">
+          <p className="reveal reveal-delay-2 text-base leading-relaxed text-muted sm:text-lg md:text-xl">
+            Gaziemir’de lisanslı antrenörlerle basketbol, voleybol, jimnastik ve yüzme.
+            Disiplinli altyapı, güvenli salon, ücretsiz deneme dersi.
+          </p>
 
           <section id="branslar" className="reveal relative z-10 mt-4 md:mt-5">
             <SectionHeading
@@ -61,7 +59,7 @@ export default function HomePage() {
               description="Yaşa özel programlar. Sertifikalı antrenörler ile temel ve teknik eğitimler, lisanslı sporcu takımları."
               className="!mb-3 md:!mb-4"
             />
-            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4 lg:gap-4">
               {branches.map((branch) => (
                 <BranchCard key={branch.slug} branch={branch} />
               ))}
@@ -71,11 +69,11 @@ export default function HomePage() {
       </section>
 
       {/* Why Asparel — typography-led */}
-      <section className="reveal border-y border-outline-variant/30 bg-surface-low/80 px-4 py-12 md:px-10 md:py-16">
-        <div className="mx-auto max-w-container">
+      <section className="reveal border-y border-outline-variant/30 bg-surface-low/80 py-12 md:py-16">
+        <div className="page-shell">
           <SectionHeading
             eyebrow="Neden Asparel"
-            title="Sadece kulüp değil, gelişim yolu"
+            title="Dijital Takip Sistemi"
             description="Velilerin güveneceği net bir yapı: lisans, güvenlik, takip."
           />
           <div className="grid gap-0 md:grid-cols-3 md:divide-x md:divide-outline-variant/40">
@@ -119,8 +117,8 @@ export default function HomePage() {
       </section>
 
       {/* FAQ + Location */}
-      <section className="reveal px-4 py-12 md:px-10 md:py-16">
-        <div className="mx-auto grid max-w-container gap-10 lg:grid-cols-2 lg:gap-12">
+      <section className="reveal py-12 md:py-16">
+        <div className="page-shell grid min-w-0 gap-10 lg:grid-cols-2 lg:gap-12">
           <div>
             <SectionHeading
               eyebrow="SSS"
@@ -165,8 +163,8 @@ export default function HomePage() {
       </section>
 
       {/* Trial form */}
-      <section className="reveal px-4 pb-14 md:px-10 md:pb-20">
-        <div className="mx-auto max-w-2xl">
+      <section className="pb-14 md:pb-20">
+        <div className="page-shell min-w-0">
           <TrialForm />
         </div>
       </section>

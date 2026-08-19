@@ -4,79 +4,55 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { BrandWordmark } from "@/components/BrandWordmark";
+import { HeaderAuth } from "@/components/HeaderAuth";
 import { getActiveBranches } from "@/data/branches";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const branches = getActiveBranches();
+  const supabaseReady = isSupabaseConfigured();
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-outline-variant/25 bg-white/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-[4.25rem] w-full max-w-container items-center justify-between px-4 md:px-10">
-        <div className="flex items-center gap-2">
+    <header className="fixed top-0 z-50 w-full border-b border-outline-variant/25 bg-white/80 pt-[env(safe-area-inset-top,0px)] backdrop-blur-xl">
+      <div className="page-shell flex h-[4.25rem] items-center justify-between gap-2">
+        <div className="flex min-w-0 items-center gap-1 sm:gap-2">
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-lg p-2 text-navy md:hidden"
-            aria-label="Menüyü aç"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-navy md:hidden"
+            aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
             <MenuIcon open={open} />
           </button>
-          <div onClick={() => setOpen(false)}>
-            <BrandWordmark size="md" />
+          <div className="min-w-0 overflow-hidden" onClick={() => setOpen(false)}>
+            <BrandWordmark size="md" className="max-w-[9.75rem] sm:max-w-none" />
           </div>
         </div>
 
         <nav className="hidden items-center gap-9 md:flex" aria-label="Ana menü">
           <NavLink href="/" label="Anasayfa" pathname={pathname} />
-          <div className="group relative">
-            <span className="cursor-default text-[13px] font-semibold tracking-wide text-muted transition-colors group-hover:text-arel">
-              Branşlar
-            </span>
-            <div className="invisible absolute left-1/2 top-full z-50 mt-3 min-w-48 -translate-x-1/2 rounded-2xl border border-outline-variant/40 bg-white p-2 opacity-0 shadow-xl transition group-hover:visible group-hover:opacity-100">
-              {branches.map((b) => (
-                <Link
-                  key={b.slug}
-                  href={`/branslar/${b.slug}`}
-                  className="block rounded-xl px-3 py-2.5 text-sm font-medium text-navy hover:bg-surface-low hover:text-arel"
-                >
-                  {b.name}
-                </Link>
-              ))}
-            </div>
-          </div>
+          <NavLink href="/#branslar" label="Branşlar" pathname={pathname} />
           <NavLink href="/iletisim" label="İletişim" pathname={pathname} />
         </nav>
 
-        <div className="flex items-center gap-2 md:gap-3">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 md:gap-3">
           <PathHashLink
             pathname="/iletisim"
             hash="#basvuru"
-            className="cta-lift rounded-full bg-navy px-4 py-2.5 text-sm font-semibold text-white md:px-5"
+            className="cta-lift rounded-full bg-navy px-3 py-2.5 text-sm font-semibold text-white sm:px-4 md:px-5"
           >
-            Ücretsiz Deneme
+            <span className="sm:hidden">Deneme</span>
+            <span className="hidden sm:inline">Ücretsiz Deneme</span>
           </PathHashLink>
-          <PathHashLink
-            pathname="/"
-            hash="#giris-sporcu"
-            className="hidden rounded-full border border-outline-variant/50 px-4 py-2.5 text-sm font-semibold text-navy transition hover:border-arel hover:text-arel md:inline-flex"
-          >
-            Sporcu
-          </PathHashLink>
-          <PathHashLink
-            pathname="/"
-            hash="#giris-antrenor"
-            className="hidden rounded-full border border-outline-variant/50 px-4 py-2.5 text-sm font-semibold text-navy transition hover:border-arel hover:text-arel md:inline-flex"
-          >
-            Antrenör
-          </PathHashLink>
+          <HeaderAuth configured={supabaseReady} />
         </div>
       </div>
 
       {open && (
-        <div className="border-t border-outline-variant/25 bg-white px-4 py-4 md:hidden">
+        <div className="max-h-[min(70dvh,calc(100dvh-8.5rem))] overflow-y-auto border-t border-outline-variant/25 bg-white px-4 py-4 md:hidden">
           <nav className="flex flex-col gap-1" aria-label="Mobil menü">
             <Link
               href="/"
@@ -102,22 +78,9 @@ export function Header() {
             >
               İletişim
             </Link>
-            <PathHashLink
-              pathname="/"
-              hash="#giris-sporcu"
-              className="rounded-xl px-3 py-3 text-base font-semibold text-navy hover:bg-surface-low"
-              onNavigate={() => setOpen(false)}
-            >
-              Sporcu
-            </PathHashLink>
-            <PathHashLink
-              pathname="/"
-              hash="#giris-antrenor"
-              className="rounded-xl px-3 py-3 text-base font-semibold text-navy hover:bg-surface-low"
-              onNavigate={() => setOpen(false)}
-            >
-              Antrenör
-            </PathHashLink>
+            <div onClick={() => setOpen(false)}>
+              <HeaderAuth configured={supabaseReady} variant="mobile" />
+            </div>
           </nav>
         </div>
       )}
@@ -172,7 +135,12 @@ function NavLink({
   label: string;
   pathname: string;
 }) {
-  const active = href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href);
+  const active =
+    href === "/"
+      ? pathname === "/"
+      : href === "/#branslar"
+        ? pathname.startsWith("/branslar")
+        : pathname === href || pathname.startsWith(href);
 
   return (
     <Link

@@ -29,6 +29,23 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Üye girişi (Supabase)
+
+Hesaplar siteden açılmaz; kulüp Supabase’ten kullanıcı oluşturur. Yeni sporcu/antrenör başvuruları Calendly’de kalır.
+
+1. [Supabase](https://supabase.com) projesi açın.
+2. `supabase/schema.sql` dosyasını SQL Editor’da çalıştırın.
+3. Authentication → Users → **Add user** ile e-posta ve şifre verin.
+4. Table Editor’da `profiles` satırı ekleyin: `id` = kullanıcının UUID’si, `full_name`, `role` (`sporcu` veya `antrenor`). Kullanıcıyı **e-posta onaylı** oluşturun (Authentication → Confirm email kapalı veya Add user’da auto-confirm).
+5. `.env.local` (ve Vercel env) içine kopyalayın:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
+
+Giriş: `/giris` · Panel: `/panel`
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

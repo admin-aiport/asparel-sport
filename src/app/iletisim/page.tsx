@@ -29,9 +29,9 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="px-4 pb-16 pt-28 md:px-10 md:pb-20 md:pt-36">
-        <div className="mx-auto grid max-w-container gap-10 lg:grid-cols-2 lg:gap-14">
-          <div>
+      <section className="pb-16 pt-28 md:pb-20 md:pt-36">
+        <div className="page-shell grid min-w-0 gap-10 lg:grid-cols-2 lg:gap-14">
+          <div className="min-w-0">
             <SectionHeading
               eyebrow="İletişim"
               title="Hemen başlayalım"
@@ -39,11 +39,11 @@ export default function ContactPage() {
             />
             <TrialForm />
           </div>
-          <div className="space-y-6">
+          <div className="min-w-0 space-y-6">
             <ContactChannels variant="page" />
             <div className="overflow-hidden rounded-3xl border border-outline-variant/35 bg-white">
-              <div className="flex items-start justify-between gap-4 p-6 pb-4">
-                <div>
+              <div className="flex flex-col gap-4 p-5 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4 sm:p-6 sm:pb-4">
+                <div className="min-w-0">
                   <h2 className="font-display text-xl font-bold text-navy">Şube</h2>
                   <p className="mt-2 text-sm text-muted">{site.address.line}</p>
                   <p className="mt-1 text-sm text-muted">
@@ -54,7 +54,7 @@ export default function ContactPage() {
                   href={site.mapsLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shrink-0 rounded-full border border-outline-variant/50 px-4 py-2 text-sm font-semibold text-navy transition hover:border-arel hover:text-arel"
+                  className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-full border border-outline-variant/50 px-4 py-2 text-sm font-semibold text-navy transition hover:border-arel hover:text-arel"
                 >
                   Yol Tarifi
                 </a>
@@ -87,8 +87,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="border-t border-outline-variant/30 bg-surface-low/60 px-4 py-16 md:px-10 md:py-20">
-        <div className="mx-auto max-w-3xl">
+      <section className="border-t border-outline-variant/30 bg-surface-low/60 py-16 md:py-20">
+        <div className="page-shell">
           <SectionHeading align="center" eyebrow="SSS" title="Sıkça sorulan sorular" />
           <FaqAccordion items={faqs} />
         </div>

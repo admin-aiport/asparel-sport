@@ -7,7 +7,7 @@ const fabClass =
 
 export function WhatsAppFab() {
   return (
-    <div className="fixed bottom-24 right-4 z-50 flex flex-col gap-3 md:bottom-8 md:right-8">
+    <div className="fixed bottom-[calc(6rem+env(safe-area-inset-bottom,0px))] right-3 z-40 flex flex-col gap-3 md:bottom-8 md:right-8">
       <Link
         href={site.bipUrl}
         target="_blank"

@@ -96,13 +96,31 @@ type CalendlyEmbedProps = {
 };
 
 function applyWidgetBox(el: HTMLElement) {
-  // Inline height is required: Calendly concatenates parent.style and produces
-  // `position: relative;null` when the attribute is missing, so the iframe
-  // never gets a used height. Do not pass data-url (avoids auto-init + JS init).
   el.style.position = "relative";
   el.style.width = "100%";
+  el.style.maxWidth = "100%";
   el.style.minWidth = "0";
   el.style.height = `${WIDGET_HEIGHT_PX}px`;
+}
+
+function waitUntilRevealVisible(el: HTMLElement, signal: { cancelled: boolean }): Promise<void> {
+  const reveal = el.closest(".reveal");
+  if (!reveal || reveal.classList.contains("is-visible")) return Promise.resolve();
+
+  return new Promise((resolve) => {
+    const finish = () => {
+      observer.disconnect();
+      resolve();
+    };
+
+    const observer = new MutationObserver(() => {
+      if (signal.cancelled || reveal.classList.contains("is-visible")) finish();
+    });
+
+    observer.observe(reveal, { attributes: true, attributeFilter: ["class"] });
+
+    if (reveal.classList.contains("is-visible")) finish();
+  });
 }
 
 export function CalendlyEmbed({
@@ -117,42 +135,57 @@ export function CalendlyEmbed({
     const el = containerRef.current;
     if (!el) return;
 
-    let cancelled = false;
+    const signal = { cancelled: false };
     applyWidgetBox(el);
+    el.setAttribute("data-url", url);
 
-    loadCalendlyScript()
-      .then(() => {
-        if (cancelled || !containerRef.current || !window.Calendly) return;
-        const parent = containerRef.current;
-        parent.replaceChildren();
-        applyWidgetBox(parent);
-        window.Calendly.initInlineWidget({
-          url,
-          parentElement: parent,
-        });
-      })
-      .catch(() => {
-        /* fallback link remains visible below */
+    void (async () => {
+      await waitUntilRevealVisible(el, signal);
+      if (signal.cancelled) return;
+
+      try {
+        await loadCalendlyScript();
+      } catch {
+        return;
+      }
+
+      if (signal.cancelled || !window.Calendly) return;
+
+      const parent = containerRef.current;
+      if (!parent) return;
+      if (parent.querySelector("iframe")) return;
+
+      parent.removeAttribute("data-processed");
+      parent.replaceChildren();
+      applyWidgetBox(parent);
+      parent.setAttribute("data-url", url);
+      window.Calendly.initInlineWidget({
+        url,
+        parentElement: parent,
       });
+    })();
 
     return () => {
-      cancelled = true;
-      el.replaceChildren();
+      signal.cancelled = true;
     };
   }, [url]);
 
   return (
     <>
-      <div
-        ref={containerRef}
-        className={`calendly-inline-widget w-full max-w-full overflow-hidden rounded-2xl ${className}`}
-        style={{
-          position: "relative",
-          width: "100%",
-          minWidth: 0,
-          height: WIDGET_HEIGHT_PX,
-        }}
-      />
+      <div className={`calendly-embed-shell ${className}`}>
+        <div
+          ref={containerRef}
+          className="calendly-inline-widget w-full max-w-full min-w-0 rounded-2xl"
+          data-url={url}
+          style={{
+            position: "relative",
+            width: "100%",
+            maxWidth: "100%",
+            minWidth: 0,
+            height: WIDGET_HEIGHT_PX,
+          }}
+        />
+      </div>
       {fallbackHref && (
         <p className="mt-4 text-center text-sm text-muted">
           Takvim yüklenmezse{" "}
