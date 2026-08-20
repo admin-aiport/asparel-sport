@@ -33,6 +33,17 @@ export function BottomNav() {
               className={`flex min-h-12 min-w-[4.5rem] flex-col items-center justify-center px-2 py-1 transition ${
                 active ? "scale-110 text-secondary-container" : "text-outline hover:text-navy"
               }`}
+              onClick={(event) => {
+                if (item.href !== "/#branslar" || pathname !== "/") return;
+                event.preventDefault();
+                if (window.location.hash !== "#branslar") {
+                  history.replaceState(null, "", "#branslar");
+                }
+                document.getElementById("branslar")?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }}
             >
               <NavIcon name={item.icon} filled={active} />
               <span className="mt-1 text-xs font-bold">{item.label}</span>

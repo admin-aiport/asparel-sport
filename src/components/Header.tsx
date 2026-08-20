@@ -139,7 +139,7 @@ function NavLink({
     href === "/"
       ? pathname === "/"
       : href === "/#branslar"
-        ? pathname.startsWith("/branslar")
+        ? pathname === "/" || pathname.startsWith("/branslar")
         : pathname === href || pathname.startsWith(href);
 
   return (
@@ -148,6 +148,17 @@ function NavLink({
       className={`text-[13px] font-semibold tracking-wide transition-colors hover:text-arel ${
         active ? "text-arel" : "text-muted"
       }`}
+      onClick={(event) => {
+        if (href !== "/#branslar" || pathname !== "/") return;
+        event.preventDefault();
+        if (window.location.hash !== "#branslar") {
+          history.replaceState(null, "", "#branslar");
+        }
+        document.getElementById("branslar")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }}
     >
       {label}
     </Link>

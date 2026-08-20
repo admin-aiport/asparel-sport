@@ -32,7 +32,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero — brand-led, full-bleed photo */}
-      <section className="relative min-h-[70svh] overflow-hidden md:min-h-[80svh]">
+      <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
           <Image
             src="/brand/hero-academy.jpg"
@@ -46,13 +46,16 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/40" />
         </div>
 
-        <div className="page-shell relative flex min-h-[70svh] flex-col justify-start pb-12 pt-28 md:min-h-[80svh] md:pb-16 md:pt-32">
+        <div className="page-shell relative flex flex-col justify-start pb-12 pt-28 md:pb-16 md:pt-32">
           <p className="reveal reveal-delay-2 text-base leading-relaxed text-muted sm:text-lg md:text-xl">
             Gaziemir’de lisanslı antrenörlerle basketbol, voleybol, jimnastik ve yüzme.
             Disiplinli altyapı, güvenli salon, ücretsiz deneme dersi.
           </p>
 
-          <section id="branslar" className="reveal relative z-10 mt-4 md:mt-5">
+          <section
+            id="branslar"
+            className="relative z-10 mt-4 scroll-mt-[calc(4.25rem+env(safe-area-inset-top,0px)+0.5rem)] md:mt-5"
+          >
             <SectionHeading
               eyebrow="Eğitimlerimiz"
               title="Branşlarımız"

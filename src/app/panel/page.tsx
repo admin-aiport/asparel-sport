@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
+import { signOutAction } from "@/app/panel/actions";
 import { CoachPlanBoard } from "@/components/CoachPlanBoard";
 import { getBranchBySlug } from "@/data/branches";
 import { getCurrentProfile, getSessionUser } from "@/lib/auth";
 import { isMemberRole, isPlanBranch, type Profile, type TrainingPlan } from "@/lib/member";
+import { isAdminConfigured } from "@/lib/supabase/admin";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { signOutAction } from "@/app/panel/actions";
 
 export const metadata: Metadata = {
   title: "Üye paneli",
@@ -44,7 +45,7 @@ export default async function PanelPage() {
 
   if (profile.role === "antrenor") {
     const [{ data: athletes }, { data: plans }] = await Promise.all([
-      supabase.from("profiles").select("id, full_name, role").eq("role", "sporcu").order("full_name"),
+      supabase.from("profiles").select("id, full_name, email, role").eq("role", "sporcu").order("full_name"),
       supabase.from("plans").select("id, athlete_id, coach_id, title, branch, weekday, notes, created_at").order("created_at", { ascending: false }),
     ]);
 
@@ -54,6 +55,7 @@ export default async function PanelPage() {
           coachId={profile.id}
           athletes={asProfiles(athletes)}
           plans={asPlans(plans)}
+          adminConfigured={isAdminConfigured()}
         />
       </PanelShell>
     );
@@ -86,7 +88,7 @@ function PanelShell({ profile, children }: { profile: Profile; children: ReactNo
             </h1>
             <p className="mt-2 text-sm text-muted">
               {profile.role === "antrenor"
-                ? "Sporcularınıza antrenman planı ekleyin ve güncelleyin."
+                ? "Sporcuları yönetin; seçilen sporcuya plan yazın."
                 : "Antrenman planlarınız aşağıda."}
             </p>
           </div>
@@ -130,12 +132,19 @@ function asProfiles(rows: unknown): Profile[] {
   if (!Array.isArray(rows)) return [];
   return rows.flatMap((row) => {
     if (!row || typeof row !== "object") return [];
-    const item = row as { id?: unknown; full_name?: unknown; role?: unknown };
+    const item = row as { id?: unknown; full_name?: unknown; role?: unknown; email?: unknown };
     if (typeof item.id !== "string" || typeof item.full_name !== "string" || typeof item.role !== "string") {
       return [];
     }
     if (!isMemberRole(item.role)) return [];
-    return [{ id: item.id, full_name: item.full_name, role: item.role }];
+    return [
+      {
+        id: item.id,
+        full_name: item.full_name,
+        role: item.role,
+        email: typeof item.email === "string" ? item.email : "",
+      },
+    ];
   });
 }
 

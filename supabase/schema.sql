@@ -4,9 +4,12 @@
 create table if not exists public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   full_name text not null default '',
+  email text not null default '',
   role text not null check (role in ('sporcu', 'antrenor')),
   created_at timestamptz not null default now()
 );
+
+alter table public.profiles add column if not exists email text not null default '';
 
 create table if not exists public.plans (
   id uuid primary key default gen_random_uuid(),
@@ -25,7 +28,7 @@ create index if not exists plans_coach_id_idx on public.plans (coach_id);
 alter table public.profiles enable row level security;
 alter table public.plans enable row level security;
 
-grant select on public.profiles to authenticated;
+grant select, update on public.profiles to authenticated;
 grant select, insert, update, delete on public.plans to authenticated;
 
 create or replace function public.current_role()
@@ -46,6 +49,14 @@ create policy "profiles_select_own_or_coach"
   for select
   to authenticated
   using (id = auth.uid() or public.current_role() = 'antrenor');
+
+drop policy if exists "profiles_update_athletes_by_coach" on public.profiles;
+create policy "profiles_update_athletes_by_coach"
+  on public.profiles
+  for update
+  to authenticated
+  using (public.current_role() = 'antrenor' and role = 'sporcu')
+  with check (public.current_role() = 'antrenor' and role = 'sporcu');
 
 drop policy if exists "plans_select_athlete_or_coach" on public.plans;
 create policy "plans_select_athlete_or_coach"

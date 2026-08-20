@@ -37,12 +37,15 @@ Hesaplar siteden açılmaz; kulüp Supabase’ten kullanıcı oluşturur. Yeni s
 2. `supabase/schema.sql` dosyasını SQL Editor’da çalıştırın.
 3. Authentication → Users → **Add user** ile e-posta ve şifre verin.
 4. Table Editor’da `profiles` satırı ekleyin: `id` = kullanıcının UUID’si, `full_name`, `role` (`sporcu` veya `antrenor`). Kullanıcıyı **e-posta onaylı** oluşturun (Authentication → Confirm email kapalı veya Add user’da auto-confirm).
-5. `.env.local` (ve Vercel env) içine kopyalayın:
+5. `.env.local` (ve Vercel env) içine kopyalayın. URL kök olmalı (`/rest/v1` olmadan):
 
 ```
-NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
 ```
+
+`SUPABASE_SERVICE_ROLE_KEY` yalnızca sunucuda durur (Vercel env, `NEXT_PUBLIC` değil). Antrenörün panelden sporcu eklemesi / silmesi için gerekir. Schema değişince `supabase/schema.sql` dosyasını SQL Editor’da yeniden çalıştırın.
 
 Giriş: `/giris` · Panel: `/panel`
 
