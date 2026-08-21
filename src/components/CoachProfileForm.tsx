@@ -12,6 +12,7 @@ import {
   type PlanBranch,
   type Profile,
 } from "@/lib/member";
+import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 
 export function CoachProfileForm({
   profile,
@@ -34,9 +35,49 @@ export function CoachProfileForm({
   }, [credentials]);
 
   const [preview, setPreview] = useState(profile.avatar_url || "");
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+
+  async function uploadAvatar(file: File) {
+    if (!file.type.startsWith("image/")) {
+      throw new Error("Yalnız görsel dosyası yükleyin.");
+    }
+    if (file.size > 3 * 1024 * 1024) {
+      throw new Error("Görsel en fazla 3 MB olabilir.");
+    }
+
+    const supabase = createBrowserSupabaseClient();
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      throw new Error("Oturum bulunamadı. Tekrar giriş yapın.");
+    }
+
+    const rawExt = file.name.split(".").pop()?.toLowerCase() || "jpg";
+    const ext = rawExt === "jpeg" ? "jpg" : rawExt.replace(/[^a-z0-9]/g, "") || "jpg";
+    const path = `${user.id}/avatar.${ext}`;
+
+    const { error: uploadError } = await supabase.storage.from("coach-avatars").upload(path, file, {
+      contentType: file.type || `image/${ext === "jpg" ? "jpeg" : ext}`,
+      upsert: true,
+    });
+
+    if (uploadError) {
+      throw new Error(
+        uploadError.message.includes("Bucket not found")
+          ? "Storage bucket yok. Supabase’te schema.sql (coach-avatars) çalıştırın."
+          : `Fotoğraf yüklenemedi: ${uploadError.message}`,
+      );
+    }
+
+    const { data } = supabase.storage.from("coach-avatars").getPublicUrl(path);
+    return `${data.publicUrl}?v=${Date.now()}`;
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,14 +86,27 @@ export function CoachProfileForm({
     setNotice(null);
 
     try {
-      const result = await updateCoachProfileAction(new FormData(event.currentTarget));
+      const formData = new FormData(event.currentTarget);
+
+      if (avatarFile) {
+        const url = await uploadAvatar(avatarFile);
+        formData.set("avatar_url", url);
+        setPreview(url);
+        setAvatarFile(null);
+      } else if (profile.avatar_url) {
+        formData.set("avatar_url", profile.avatar_url);
+      }
+
+      formData.delete("avatar");
+
+      const result = await updateCoachProfileAction(formData);
       if (result && "error" in result && result.error) {
         setError(result.error);
         return;
       }
       setNotice("Profil kaydedildi.");
-    } catch {
-      setError("Kayıt başarısız. Görsel çok büyük olabilir veya storage henüz kurulu değil.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Kayıt başarısız.");
     } finally {
       setPending(false);
     }
@@ -83,12 +137,12 @@ export function CoachProfileForm({
             Fotoğraf seç
             <input
               type="file"
-              name="avatar"
               accept="image/*"
               className="sr-only"
               onChange={(event) => {
                 const file = event.target.files?.[0];
                 if (!file) return;
+                setAvatarFile(file);
                 setPreview(URL.createObjectURL(file));
               }}
             />

@@ -191,45 +191,8 @@ export async function updateCoachProfileAction(formData: FormData) {
   }
 
   const supabase = await createServerSupabaseClient();
-  let avatarUrl = gate.profile.avatar_url ?? "";
-
-  const avatar = formData.get("avatar");
-  const hasAvatar =
-    avatar instanceof Blob &&
-    avatar.size > 0 &&
-    typeof (avatar as File).name === "string";
-
-  if (hasAvatar) {
-    const file = avatar as File;
-    try {
-      if (file.type && !file.type.startsWith("image/")) {
-        return { error: "Yalnız görsel dosyası yükleyin." };
-      }
-      if (file.size > 3 * 1024 * 1024) {
-        return { error: "Görsel en fazla 3 MB olabilir." };
-      }
-
-      const rawExt = file.name.split(".").pop()?.toLowerCase() || "jpg";
-      const ext = rawExt === "jpeg" ? "jpg" : rawExt.replace(/[^a-z0-9]/g, "") || "jpg";
-      const path = `${gate.profile.id}/avatar.${ext}`;
-      const bytes = new Uint8Array(await file.arrayBuffer());
-
-      const { error: uploadError } = await supabase.storage.from("coach-avatars").upload(path, bytes, {
-        contentType: file.type || `image/${ext === "jpg" ? "jpeg" : ext}`,
-        upsert: true,
-      });
-
-      if (uploadError) {
-        return { error: `Fotoğraf yüklenemedi: ${uploadError.message}` };
-      }
-
-      const { data: publicUrl } = supabase.storage.from("coach-avatars").getPublicUrl(path);
-      avatarUrl = `${publicUrl.publicUrl}?v=${Date.now()}`;
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Bilinmeyen hata";
-      return { error: `Fotoğraf yüklenemedi: ${message}` };
-    }
-  }
+  const submittedAvatarUrl = asString(formData, "avatar_url");
+  const avatarUrl = submittedAvatarUrl || gate.profile.avatar_url || "";
 
   const { error: profileError } = await supabase
     .from("profiles")
