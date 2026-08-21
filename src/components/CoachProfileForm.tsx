@@ -44,15 +44,18 @@ export function CoachProfileForm({
     setError(null);
     setNotice(null);
 
-    const result = await updateCoachProfileAction(new FormData(event.currentTarget));
-    setPending(false);
-
-    if (result && "error" in result && result.error) {
-      setError(result.error);
-      return;
+    try {
+      const result = await updateCoachProfileAction(new FormData(event.currentTarget));
+      if (result && "error" in result && result.error) {
+        setError(result.error);
+        return;
+      }
+      setNotice("Profil kaydedildi.");
+    } catch {
+      setError("Kayıt başarısız. Görsel çok büyük olabilir veya storage henüz kurulu değil.");
+    } finally {
+      setPending(false);
     }
-
-    setNotice("Profil kaydedildi.");
   }
 
   return (
