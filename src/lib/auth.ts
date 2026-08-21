@@ -23,7 +23,7 @@ export async function getCurrentProfile(): Promise<Profile | null> {
 
   const { data, error } = await supabase
     .from("profiles")
-    .select("id, full_name, role")
+    .select("id, full_name, email, role, avatar_url, show_on_homepage")
     .eq("id", user.id)
     .maybeSingle();
 
@@ -32,6 +32,9 @@ export async function getCurrentProfile(): Promise<Profile | null> {
   return {
     id: data.id,
     full_name: data.full_name,
+    email: typeof data.email === "string" ? data.email : "",
     role: data.role,
+    avatar_url: typeof data.avatar_url === "string" ? data.avatar_url : "",
+    show_on_homepage: Boolean(data.show_on_homepage),
   };
 }

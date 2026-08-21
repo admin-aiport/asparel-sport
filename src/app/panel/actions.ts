@@ -3,7 +3,15 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getCurrentProfile } from "@/lib/auth";
-import { isPlanBranch } from "@/lib/member";
+import {
+  isCoachLevel,
+  isCourseKind,
+  isPlanBranch,
+  isWeekday,
+  planBranches,
+  type CoachLevel,
+  type PlanBranch,
+} from "@/lib/member";
 import { createAdminSupabaseClient } from "@/lib/supabase/admin";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
@@ -71,7 +79,17 @@ export async function createAthleteAction(formData: FormData) {
 
   if (profileError) {
     await admin.auth.admin.deleteUser(data.user.id);
-    return { error: "Sporcu profili kaydedilemedi." };
+    const detail = profileError.message.toLowerCase();
+    if (detail.includes("email") || detail.includes("column") || profileError.code === "PGRST204") {
+      return {
+        error:
+          "profiles.email kolonu eksik. Supabase SQL Editor’da supabase/schema.sql dosyasını yeniden çalıştırın.",
+      };
+    }
+    if (detail.includes("duplicate") || profileError.code === "23505") {
+      return { error: "Bu sporcu profili zaten var." };
+    }
+    return { error: `Sporcu profili kaydedilemedi: ${profileError.message}` };
   }
 
   revalidatePath("/panel");
@@ -151,81 +169,269 @@ export async function deleteAthleteAction(formData: FormData) {
   return { ok: true as const };
 }
 
-export async function createPlanAction(formData: FormData) {
-  const profile = await getCurrentProfile();
-  if (!profile || profile.role !== "antrenor") {
-    return { error: "Yalnız antrenörler plan ekleyebilir." };
+export async function updateCoachProfileAction(formData: FormData) {
+  const gate = await requireCoach();
+  if ("error" in gate) return gate;
+
+  const fullName = asString(formData, "full_name");
+  const showOnHomepage = formData.get("show_on_homepage") === "on";
+  const avatarFile = formData.get("avatar");
+
+  if (!fullName) {
+    return { error: "Ad soyad zorunlu." };
   }
 
-  const title = asString(formData, "title");
-  const athleteId = asString(formData, "athlete_id");
-  const branch = asString(formData, "branch");
-  const weekday = asString(formData, "weekday");
-  const notes = asString(formData, "notes");
-
-  if (!title || !athleteId || !isPlanBranch(branch) || !weekday) {
-    return { error: "Başlık, sporcu, branş ve gün zorunlu." };
+  const desired: Array<{ branch: PlanBranch; level: CoachLevel }> = [];
+  for (const branch of planBranches) {
+    const raw = asString(formData, `level_${branch}`);
+    if (!raw) continue;
+    if (!isCoachLevel(raw)) {
+      return { error: "Geçersiz belge seviyesi." };
+    }
+    desired.push({ branch, level: raw });
   }
 
   const supabase = await createServerSupabaseClient();
-  const { error } = await supabase.from("plans").insert({
-    title,
-    athlete_id: athleteId,
-    coach_id: profile.id,
-    branch,
-    weekday,
-    notes,
-  });
+  let avatarUrl = gate.profile.avatar_url ?? "";
 
-  if (error) return { error: "Plan kaydedilemedi." };
+  if (avatarFile instanceof File && avatarFile.size > 0) {
+    if (!avatarFile.type.startsWith("image/")) {
+      return { error: "Yalnız görsel dosyası yükleyin." };
+    }
+    if (avatarFile.size > 3 * 1024 * 1024) {
+      return { error: "Görsel en fazla 3 MB olabilir." };
+    }
+
+    const ext = avatarFile.name.split(".").pop()?.toLowerCase() || "jpg";
+    const path = `${gate.profile.id}/avatar.${ext === "jpeg" ? "jpg" : ext}`;
+    const buffer = Buffer.from(await avatarFile.arrayBuffer());
+
+    const { error: uploadError } = await supabase.storage.from("coach-avatars").upload(path, buffer, {
+      contentType: avatarFile.type,
+      upsert: true,
+    });
+
+    if (uploadError) {
+      return { error: `Fotoğraf yüklenemedi: ${uploadError.message}` };
+    }
+
+    const { data: publicUrl } = supabase.storage.from("coach-avatars").getPublicUrl(path);
+    avatarUrl = `${publicUrl.publicUrl}?v=${Date.now()}`;
+  }
+
+  const { error: profileError } = await supabase
+    .from("profiles")
+    .update({
+      full_name: fullName,
+      show_on_homepage: showOnHomepage,
+      avatar_url: avatarUrl,
+    })
+    .eq("id", gate.profile.id)
+    .eq("role", "antrenor");
+
+  if (profileError) {
+    return { error: `Profil kaydedilemedi: ${profileError.message}` };
+  }
+
+  const { data: existingRows } = await supabase
+    .from("coach_credentials")
+    .select("id, branch, level")
+    .eq("coach_id", gate.profile.id);
+
+  const existing = existingRows ?? [];
+  const desiredBranches = new Set(desired.map((d) => d.branch));
+
+  for (const row of existing) {
+    if (!isPlanBranch(row.branch)) continue;
+    if (!desiredBranches.has(row.branch)) {
+      await supabase.from("coach_credentials").delete().eq("id", row.id);
+    }
+  }
+
+  for (const item of desired) {
+    const current = existing.find((row) => row.branch === item.branch);
+    if (current) {
+      if (current.level !== item.level) {
+        const { error } = await supabase
+          .from("coach_credentials")
+          .update({ level: item.level })
+          .eq("id", current.id);
+        if (error) return { error: "Belge seviyesi güncellenemedi." };
+      }
+    } else {
+      const { error } = await supabase.from("coach_credentials").insert({
+        coach_id: gate.profile.id,
+        branch: item.branch,
+        level: item.level,
+      });
+      if (error) return { error: `Belge kaydedilemedi: ${error.message}` };
+    }
+  }
+
+  revalidatePath("/panel");
+  revalidatePath("/");
+  return { ok: true as const };
+}
+
+function parseAthleteIds(formData: FormData) {
+  return formData
+    .getAll("athlete_ids")
+    .flatMap((value) => (typeof value === "string" && value.trim() ? [value.trim()] : []));
+}
+
+function normalizeTime(value: string) {
+  if (/^\d{2}:\d{2}$/.test(value)) return `${value}:00`;
+  if (/^\d{2}:\d{2}:\d{2}$/.test(value)) return value;
+  return "";
+}
+
+export async function createCourseAction(formData: FormData) {
+  const gate = await requireCoach();
+  if ("error" in gate) return gate;
+
+  const title = asString(formData, "title");
+  const branch = asString(formData, "branch");
+  const weekday = asString(formData, "weekday");
+  const startTime = normalizeTime(asString(formData, "start_time"));
+  const endTime = normalizeTime(asString(formData, "end_time"));
+  const kind = asString(formData, "kind");
+  const notes = asString(formData, "notes");
+  const athleteIds = parseAthleteIds(formData);
+
+  if (!title || !isPlanBranch(branch) || !isWeekday(weekday) || !startTime || !endTime || !isCourseKind(kind)) {
+    return { error: "Başlık, branş, gün, saat ve kurs türü zorunlu." };
+  }
+  if (endTime <= startTime) {
+    return { error: "Bitiş saati başlangıçtan sonra olmalı." };
+  }
+  if (kind === "bireysel" && athleteIds.length !== 1) {
+    return { error: "Bireysel kurs için bir sporcu seçin." };
+  }
+  if (kind === "grup" && athleteIds.length < 1) {
+    return { error: "Grup kursuna en az bir sporcu ekleyin." };
+  }
+
+  const supabase = await createServerSupabaseClient();
+  const { data: course, error } = await supabase
+    .from("courses")
+    .insert({
+      coach_id: gate.profile.id,
+      title,
+      branch,
+      weekday,
+      start_time: startTime,
+      end_time: endTime,
+      kind,
+      notes,
+    })
+    .select("id")
+    .single();
+
+  if (error || !course) {
+    return { error: `Kurs kaydedilemedi: ${error?.message ?? ""}` };
+  }
+
+  const { error: enrollError } = await supabase.from("course_enrollments").insert(
+    athleteIds.map((athlete_id) => ({ course_id: course.id, athlete_id })),
+  );
+
+  if (enrollError) {
+    await supabase.from("courses").delete().eq("id", course.id);
+    return { error: "Sporcular kursa eklenemedi." };
+  }
 
   revalidatePath("/panel");
   return { ok: true as const };
 }
 
-export async function updatePlanAction(formData: FormData) {
-  const profile = await getCurrentProfile();
-  if (!profile || profile.role !== "antrenor") {
-    return { error: "Yalnız antrenörler plan düzenleyebilir." };
-  }
+export async function updateCourseAction(formData: FormData) {
+  const gate = await requireCoach();
+  if ("error" in gate) return gate;
 
   const id = asString(formData, "id");
   const title = asString(formData, "title");
-  const athleteId = asString(formData, "athlete_id");
   const branch = asString(formData, "branch");
   const weekday = asString(formData, "weekday");
+  const startTime = normalizeTime(asString(formData, "start_time"));
+  const endTime = normalizeTime(asString(formData, "end_time"));
+  const kind = asString(formData, "kind");
   const notes = asString(formData, "notes");
+  const athleteIds = parseAthleteIds(formData);
 
-  if (!id || !title || !athleteId || !isPlanBranch(branch) || !weekday) {
-    return { error: "Eksik alanlar var." };
+  if (
+    !id ||
+    !title ||
+    !isPlanBranch(branch) ||
+    !isWeekday(weekday) ||
+    !startTime ||
+    !endTime ||
+    !isCourseKind(kind)
+  ) {
+    return { error: "Eksik veya geçersiz alanlar var." };
+  }
+  if (endTime <= startTime) {
+    return { error: "Bitiş saati başlangıçtan sonra olmalı." };
+  }
+  if (kind === "bireysel" && athleteIds.length !== 1) {
+    return { error: "Bireysel kurs için bir sporcu seçin." };
+  }
+  if (kind === "grup" && athleteIds.length < 1) {
+    return { error: "Grup kursuna en az bir sporcu ekleyin." };
   }
 
   const supabase = await createServerSupabaseClient();
   const { error } = await supabase
-    .from("plans")
-    .update({ title, athlete_id: athleteId, branch, weekday, notes })
+    .from("courses")
+    .update({
+      title,
+      branch,
+      weekday,
+      start_time: startTime,
+      end_time: endTime,
+      kind,
+      notes,
+    })
     .eq("id", id)
-    .eq("coach_id", profile.id);
+    .eq("coach_id", gate.profile.id);
 
-  if (error) return { error: "Plan güncellenemedi." };
+  if (error) return { error: "Kurs güncellenemedi." };
+
+  const { data: existing } = await supabase
+    .from("course_enrollments")
+    .select("athlete_id")
+    .eq("course_id", id);
+
+  const current = new Set((existing ?? []).map((row) => row.athlete_id));
+  const desired = new Set(athleteIds);
+
+  const toRemove = [...current].filter((athleteId) => !desired.has(athleteId));
+  const toAdd = [...desired].filter((athleteId) => !current.has(athleteId));
+
+  if (toRemove.length) {
+    await supabase.from("course_enrollments").delete().eq("course_id", id).in("athlete_id", toRemove);
+  }
+  if (toAdd.length) {
+    const { error: enrollError } = await supabase
+      .from("course_enrollments")
+      .insert(toAdd.map((athlete_id) => ({ course_id: id, athlete_id })));
+    if (enrollError) return { error: "Sporcu listesi güncellenemedi." };
+  }
 
   revalidatePath("/panel");
   return { ok: true as const };
 }
 
-export async function deletePlanAction(formData: FormData) {
-  const profile = await getCurrentProfile();
-  if (!profile || profile.role !== "antrenor") {
-    return { error: "Yalnız antrenörler plan silebilir." };
-  }
+export async function deleteCourseAction(formData: FormData) {
+  const gate = await requireCoach();
+  if ("error" in gate) return gate;
 
   const id = asString(formData, "id");
-  if (!id) return { error: "Plan bulunamadı." };
+  if (!id) return { error: "Kurs bulunamadı." };
 
   const supabase = await createServerSupabaseClient();
-  const { error } = await supabase.from("plans").delete().eq("id", id).eq("coach_id", profile.id);
+  const { error } = await supabase.from("courses").delete().eq("id", id).eq("coach_id", gate.profile.id);
 
-  if (error) return { error: "Plan silinemedi." };
+  if (error) return { error: "Kurs silinemedi." };
 
   revalidatePath("/panel");
   return { ok: true as const };

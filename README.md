@@ -45,7 +45,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 ```
 
-`SUPABASE_SERVICE_ROLE_KEY` yalnızca sunucuda durur (Vercel env, `NEXT_PUBLIC` değil). Antrenörün panelden sporcu eklemesi / silmesi için gerekir. Schema değişince `supabase/schema.sql` dosyasını SQL Editor’da yeniden çalıştırın.
+`SUPABASE_SERVICE_ROLE_KEY` yalnızca sunucuda durur (Vercel env, `NEXT_PUBLIC` değil). Antrenörün panelden sporcu eklemesi / silmesi için gerekir. Schema değişince `supabase/schema.sql` dosyasını SQL Editor’da yeniden çalıştırın (antrenör profili, `courses` / `course_enrollments` haftalık takvim, `coach-avatars` storage dahil). Eski `plans` tablosu kaldırılır.
 
 Giriş: `/giris` · Panel: `/panel`
 

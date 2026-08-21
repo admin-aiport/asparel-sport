@@ -2,12 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { BranchCard } from "@/components/BranchCard";
+import { CoachesSection } from "@/components/CoachesSection";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TrialForm } from "@/components/TrialForm";
 import { MemberAccess } from "@/components/MemberAccess";
 import { getActiveBranches } from "@/data/branches";
 import { faqs } from "@/data/faq";
+import { getHomepageCoaches } from "@/lib/coaches";
 import { openGraphDefaults, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -26,8 +28,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
   const branches = getActiveBranches();
+  const coaches = await getHomepageCoaches();
 
   return (
     <>
@@ -70,6 +73,8 @@ export default function HomePage() {
           </section>
         </div>
       </section>
+
+      <CoachesSection coaches={coaches} />
 
       {/* Why Asparel — typography-led */}
       <section className="reveal border-y border-outline-variant/30 bg-surface-low/80 py-12 md:py-16">
